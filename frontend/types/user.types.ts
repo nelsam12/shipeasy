@@ -8,14 +8,6 @@ export interface User {
   phone?: string;
 }
 
-export interface AuthUser {
-  id: string;
-  email: string;
-  fullName: string;
-  role: Role;
-  phone: string;
-}
-
 export interface CreateUserDto {
   email: string;
   fullName: string;

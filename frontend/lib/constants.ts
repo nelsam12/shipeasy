@@ -21,6 +21,10 @@ export const MESSAGES = {
     INVALID_CREDENTIALS: "Identifiants invalides",
     REQUIRED_FIELD: "Ce champ est requis",
   },
+  VALIDATION: {
+    PHONE_INVALID: "Numéro de téléphone invalide",
+    PASSWORD_MISMATCH: "Les mots de passe ne correspondent pas",
+  },
 };
 
 export const API_ENDPOINTS = {

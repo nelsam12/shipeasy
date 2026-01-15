@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { User } from "@/types";
 import { getMe, logout as apiLogout } from "@/services/auth.service";
 import type { AuthContextType } from "@/types";

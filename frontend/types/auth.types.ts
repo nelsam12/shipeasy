@@ -1,4 +1,4 @@
-import { AuthUser } from "./user.types";
+import { User } from "./user.types";
 
 export interface LoginModel {
   login: string;
@@ -14,15 +14,15 @@ export interface AuthResponse {
 }
 
 export interface AuthContextType {
-  user: AuthUser | null;
+  user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   isLoggingOut: boolean;
-  setUser: (user: AuthUser | null) => void;
+  setUser: (user: User | null) => void;
   refreshUser: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
 export interface MeResponse {
-  user: AuthUser;
+  user: User;
 }
