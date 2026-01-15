@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
   Eye,
@@ -15,26 +14,22 @@ import {
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-import { Button } from "@/src/shared/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/shared/components/ui/card";
-import { Field, FieldLabel } from "@/src/shared/components/ui/field";
-import { Input } from "@/src/shared/components/ui/input";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import { Tabs, TabsList, TabsTrigger } from "@/src/shared/components/ui/tabs";
-import { useRegister } from "@/src/features/auth/hooks";
-import { Role } from "@/src/features/auth/types";
-import { ROUTES, MESSAGES } from "@/src/shared/constants";
+} from "@/components/ui/card";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { register } from "@/services/auth.service";
+import { Role } from "@/models/role.model";
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const { register: registerUser, isLoading } = useRegister();
-  
   const [activeTab, setActiveTab] = useState<Role>(Role.CLIENT);
   const [form, setForm] = useState({
     email: "",
@@ -48,6 +43,7 @@ export default function RegisterPage() {
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
@@ -62,31 +58,41 @@ export default function RegisterPage() {
       return "Champs obligatoires manquants";
     if (activeTab === Role.GP && (!form.companyName || !form.address))
       return "Les infos d'agence sont obligatoires pour un GP";
-    if (!isValidPhoneNumber(form.phone)) 
-      return MESSAGES.VALIDATION.PHONE_INVALID;
+    if (!isValidPhoneNumber(form.phone)) return "Numéro de téléphone invalide";
     if (form.password !== confirmPassword)
-      return MESSAGES.VALIDATION.PASSWORD_MISMATCH;
+      return "Les mots de passe ne correspondent pas";
     return null;
   };
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    
     const validationError = validateForm();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+    if (validationError) return setError(validationError);
 
     try {
-      await registerUser({ ...form, role: activeTab });
-      toast.success(MESSAGES.AUTH.REGISTER_SUCCESS);
-      router.push(ROUTES.LOGIN);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Erreur de création";
-      setError(message);
-      toast.error(message);
+      setIsLoading(true);
+      await register({ ...form, role: activeTab });
+      toast.success("Compte créé avec succès !");
+    } catch (err: unknown) {
+      const errorWithResponse = err as {
+        response?: { data?: { message?: string | string[] } };
+        message?: string;
+      };
+
+      const rawMessage =
+        errorWithResponse.response?.data?.message ||
+        errorWithResponse.message ||
+        "Erreur de création";
+
+      const formattedMessage = Array.isArray(rawMessage)
+        ? rawMessage[0]
+        : rawMessage;
+
+      setError(formattedMessage);
+      toast.error(formattedMessage);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -133,7 +139,7 @@ export default function RegisterPage() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                  {/* Common Fields */}
+                  {/* Champs Communs */}
                   <Field>
                     <FieldLabel>Nom complet</FieldLabel>
                     <Input
@@ -157,7 +163,7 @@ export default function RegisterPage() {
                     />
                   </Field>
 
-                  {/* GP specific fields */}
+                  {/* Spécifique GP */}
                   {activeTab === Role.GP && (
                     <>
                       <Field>
@@ -209,7 +215,7 @@ export default function RegisterPage() {
                     </Field>
                   )}
 
-                  {/* Password fields */}
+                  {/* Section Mots de passe avec correction Oeil */}
                   <Field>
                     <FieldLabel>Mot de passe</FieldLabel>
                     <div className="relative group">

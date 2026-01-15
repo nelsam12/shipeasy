@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/navbar";
-import { GuestGuard } from "../guards/guest-guard";
+import { Navbar } from "@/src/shared/components/layouts/Navbar";
+import { GuestGuard } from "@/src/shared/components/guards";
 
 export default function AuthLayout({
   children,

@@ -19,7 +19,8 @@ export function RoleGuard({ children, allowedRoles }: RoleGuardProps) {
   useEffect(() => {
     if (!isLoading && user && !allowedRoles.includes(user.role)) {
       // Redirect to appropriate dashboard based on user role
-      const redirectPath = ROUTES.DASHBOARD[user.role] || ROUTES.HOME;
+      const roleKey = user.role.toUpperCase() as keyof typeof ROUTES.DASHBOARD;
+      const redirectPath = ROUTES.DASHBOARD[roleKey] || ROUTES.HOME;
       router.push(redirectPath);
     }
   }, [user, isLoading, allowedRoles, router]);
