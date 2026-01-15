@@ -1,4 +1,4 @@
-import { CreateUserDto, LoginModel, User, ApiResponse } from "@/types";
+import type { CreateUserDto, LoginModel, User, ApiResponse } from "@/types";
 import { http } from "./http.service";
 import { API_ENDPOINTS, BodyType } from "@/lib/constants";
 

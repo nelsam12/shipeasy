@@ -20,7 +20,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else {
         setUser(null);
       }
-    } catch {
+    } catch (error) {
+      console.error('Failed to refresh user:', error);
       setUser(null);
     } finally {
       setIsLoading(false);

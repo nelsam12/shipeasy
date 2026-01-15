@@ -5,7 +5,7 @@ export interface User {
   email: string;
   fullName: string;
   role: Role;
-  phone?: string;
+  phone: string;
 }
 
 export interface CreateUserDto {
