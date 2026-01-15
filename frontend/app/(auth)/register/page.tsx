@@ -15,21 +15,21 @@ import {
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-import { Button } from "@/src/shared/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/shared/components/ui/card";
-import { Field, FieldLabel } from "@/src/shared/components/ui/field";
-import { Input } from "@/src/shared/components/ui/input";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import { Tabs, TabsList, TabsTrigger } from "@/src/shared/components/ui/tabs";
-import { useRegister } from "@/src/features/auth/hooks";
-import { Role } from "@/src/features/auth/types";
-import { ROUTES, MESSAGES } from "@/src/shared/constants";
+} from "@/components/ui/card";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRegister } from "@/hooks/useRegister";
+import { Role } from "@/types";
+import { ROUTES, MESSAGES } from "@/lib/constants";
 
 export default function RegisterPage() {
   const router = useRouter();

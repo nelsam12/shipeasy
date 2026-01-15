@@ -1,13 +1,10 @@
-import { CreateUserDto } from "@/models/create-user.model";
-import { LoginModel } from "@/models/login.model";
+import { CreateUserDto, LoginModel, User, ApiResponse } from "@/types";
 import { http } from "./http.service";
-import { API, BodyType } from "@/lib/consts";
-import { User } from "@/models/user.model";
-import { ApiResponse } from "@/models/api-response.model";
+import { API_ENDPOINTS, BodyType } from "@/lib/constants";
 
 // On utilise ApiResponse<string> car ton login backend renvoie un message ou un token
 export function login(payload: LoginModel) {
-  return http<ApiResponse<User>, LoginModel>(API.AUTH.LOGIN, {
+  return http<ApiResponse<User>, LoginModel>(API_ENDPOINTS.AUTH.LOGIN, {
     method: "POST",
     body: payload,
     bodyType: BodyType.JSON,
@@ -15,7 +12,7 @@ export function login(payload: LoginModel) {
 }
 
 export function register(payload: CreateUserDto) {
-  return http<ApiResponse<User>, CreateUserDto>(API.AUTH.REGISTER, {
+  return http<ApiResponse<User>, CreateUserDto>(API_ENDPOINTS.AUTH.REGISTER, {
     method: "POST",
     body: payload,
     bodyType: BodyType.JSON,
@@ -24,13 +21,13 @@ export function register(payload: CreateUserDto) {
 
 // Crucial : Retourne ApiResponse<User> pour correspondre au format { success, data }
 export async function getMe(): Promise<ApiResponse<User>> {
-  return http<ApiResponse<User>, undefined>(API.AUTH.ME, {
+  return http<ApiResponse<User>, undefined>(API_ENDPOINTS.AUTH.ME, {
     method: "GET",
   });
 }
 
 export async function logout(): Promise<void> {
-  await http<void, undefined>(API.AUTH.LOGOUT, {
+  await http<void, undefined>(API_ENDPOINTS.AUTH.LOGOUT, {
     method: "POST",
   });
 }

@@ -1,15 +1,15 @@
 // app/dashboard/gp/page.tsx
 
-import { RequireRole } from "@/app/guards/require-role";
-import { Role } from "@/models/role.model";
+import { RoleGuard } from "@/components/guards/RoleGuard";
+import { Role } from "@/types";
 
 export default function GpDashboardPage() {
   return (
-    <RequireRole role={Role.GP}>
+    <RoleGuard role={Role.GP}>
       <div>
         <h1>Bienvenue dans votre espace GP</h1>
         {/* Contenu spécifique au GP */}
       </div>
-    </RequireRole>
+    </RoleGuard>
   );
 }
