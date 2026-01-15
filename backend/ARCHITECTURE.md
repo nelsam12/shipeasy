@@ -105,16 +105,16 @@ All dependencies are injected via constructors using NestJS DI
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Run development server
-npm run dev
+pnpm dev
 
 # Build
-npm run build
+pnpm  build
 
 # Run linter
-npm run lint
+pnpm  lint
 ```
 
 ## 📝 Key Files

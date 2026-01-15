@@ -5,8 +5,8 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
-import { ApiResponse } from '../../../shared/interfaces/api-response';
 import type { Response } from 'express';
+import { ApiResponse } from '../../shared';
 
 type PaginatedResult<T> = {
   data: T;

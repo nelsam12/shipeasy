@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import type { Request } from 'express';
-import { JwtUser } from '../../../shared/types/request-with-user';
+import { JwtUser } from '../../shared';
 
 interface RequestWithUser extends Request {
   user: JwtUser;

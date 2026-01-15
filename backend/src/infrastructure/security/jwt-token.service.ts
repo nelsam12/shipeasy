@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import type { ITokenService } from '../../../core/ports/services/token.service';
+import { ITokenService } from '../../core/ports/services';
 
 /**
  * JWT Token Service Implementation
