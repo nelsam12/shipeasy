@@ -4,19 +4,19 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Eye, EyeOff, LogInIcon } from "lucide-react";
-import { Button } from "@/src/shared/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/shared/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/src/shared/components/ui/field";
-import { Input } from "@/src/shared/components/ui/input";
-import { Spinner } from "@/src/shared/components/ui/spinner";
-import { useLogin } from "@/src/features/auth/hooks";
-import { ROUTES, MESSAGES } from "@/src/shared/constants";
+} from "@/components/ui/card";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import { useLogin } from "@/hooks/useLogin";
+import { MESSAGES } from "@/lib/constants";
 
 export default function LoginPage() {
   const router = useRouter();

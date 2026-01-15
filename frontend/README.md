@@ -1,69 +1,67 @@
-# 📦 ShipEasy Frontend
+# ShipEasy Frontend
 
-Application de gestion logistique construite avec **Next.js 16** et **React 19**, permettant la gestion de colis entre clients et groupeurs professionnels (GP).
+Application de gestion logistique avec Next.js 16, React 19 et TypeScript.
 
 ## 🚀 Démarrage Rapide
 
-### Prérequis
-
-- **Node.js** 20+
-- **npm** ou **pnpm**
-- Backend API en cours d'exécution (voir `/backend`)
-
-### Installation
-
 ```bash
-# Installer les dépendances
+# Installation
 npm install
 
-# Configurer les variables d'environnement
-cp .env.example .env.local
-
-# Démarrer en mode développement
+# Développement
 npm run dev
+
+# Build
+npm run build
+
+# Démarrage production
+npm run start
 ```
 
 L'application sera accessible sur [http://localhost:3000](http://localhost:3000)
 
-### Scripts disponibles
+## 📁 Structure
 
-```bash
-npm run dev      # Démarrage en mode développement
-npm run build    # Build de production
-npm run start    # Démarrage du serveur de production
-npm run lint     # Vérification du code
 ```
+app/          → Pages Next.js (App Router)
+  ├── (public)/     → Routes publiques
+  ├── (auth)/       → Pages d'authentification
+  ├── (dashboard)/  → Dashboards protégés
+  └── layout.tsx    → Layout racine
 
-## 🏗️ Architecture
+components/   → Composants React
+  ├── ui/           → shadcn/ui (composants de base)
+  ├── layouts/      → Navbar, Sidebar, layouts
+  ├── auth/         → AuthProvider
+  └── guards/       → AuthGuard, RoleGuard, GuestGuard
 
-Ce projet utilise une **architecture feature-based** pour une meilleure organisation et maintenabilité.
-
-Pour plus de détails, consultez [ARCHITECTURE.md](./ARCHITECTURE.md).
+hooks/        → Custom hooks (useAuth, useLogin, useRegister)
+lib/          → Utilitaires (api, utils, constants)
+services/     → Services API (auth.service)
+types/        → Types TypeScript
+public/       → Assets statiques
+```
 
 ## 🛠️ Technologies
 
-### Core
-- **Next.js 16** - Framework React avec App Router
-- **React 19** - Bibliothèque UI
-- **TypeScript** - Typage statique
-- **Tailwind CSS** - Styling
+- **Framework** : Next.js 16 (App Router)
+- **UI** : React 19 + shadcn/ui + Tailwind CSS 4
+- **State** : React Context API
+- **HTTP Client** : Axios
+- **Validation** : Zod + React Hook Form
+- **Notifications** : Sonner
 
-### State Management & Forms
-- **Zustand** - Gestion d'état globale
-- **Zod** - Validation de schémas
-- **React Hook Form** - Gestion de formulaires
+## 🔗 Liens
 
-### UI Components
-- **shadcn/ui** - Composants UI modernes
-- **Radix UI** - Primitives accessibles
-- **Lucide React** - Icônes
+- [Documentation Architecture](./ARCHITECTURE.md)
+- [Backend API](../backend)
 
-## 📖 Guides
+## 📖 Exemples d'utilisation
 
 ### Authentification
 
 ```tsx
-import { useAuth, useLogin } from '@/src/features/auth/hooks';
+import { useAuth, useLogin } from '@/hooks';
 
 function MyComponent() {
   const { user, isAuthenticated } = useAuth();
@@ -80,32 +78,21 @@ function MyComponent() {
 ### Protection de Routes
 
 ```tsx
-import { AuthGuard, RoleGuard } from '@/src/shared/components/guards';
-import { Role } from '@/src/features/auth/types';
+import { AuthGuard, RoleGuard } from '@/components/guards';
+import { Role } from '@/types';
 
-// Protéger une route
+// Protéger une route authentifiée
 <AuthGuard>
   <DashboardPage />
 </AuthGuard>
 
 // Limiter par rôle
-<RoleGuard allowedRoles={[Role.ADMIN, Role.GESTIONNAIRE]}>
+<RoleGuard role={Role.ADMIN}>
   <AdminPanel />
 </RoleGuard>
 ```
-
-## 📚 Ressources
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Documentation](https://react.dev)
-- [Zustand](https://zustand.docs.pmnd.rs/)
-- [Zod](https://zod.dev/)
-- [shadcn/ui](https://ui.shadcn.com/)
 
 ## 📄 Licence
 
 Propriétaire - ShipEasy © 2024
 
----
-
-**Besoin d'aide ?** Consultez [ARCHITECTURE.md](./ARCHITECTURE.md) pour comprendre l'organisation du projet.
