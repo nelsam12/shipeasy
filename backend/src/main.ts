@@ -3,8 +3,6 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
-import { ApiResponseInterceptor } from './common/interceptors/api-response/api-response.interceptor';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -24,14 +22,11 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.useGlobalInterceptors(new ApiResponseInterceptor());
-  app.useGlobalFilters(new HttpExceptionFilter());
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT') ?? 4000;
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  app.use(cookieParser());
 
   const config = new DocumentBuilder()
     .setTitle('ShipEasy API')
