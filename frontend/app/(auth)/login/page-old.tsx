@@ -1,33 +1,36 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Eye, EyeOff, LogInIcon } from "lucide-react";
-import { Button } from "@/src/shared/components/ui/button";
+import { useAuth } from "@/app/context/auth.context";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/src/shared/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/src/shared/components/ui/field";
-import { Input } from "@/src/shared/components/ui/input";
-import { Spinner } from "@/src/shared/components/ui/spinner";
-import { useLogin } from "@/src/features/auth/hooks";
-import { ROUTES, MESSAGES } from "@/src/shared/constants";
+} from "@/components/ui/card";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import { LoginModel } from "@/models/login.model";
+import { login as loginApi } from "@/services/auth.service"; // Renommé pour éviter conflit
+import { Eye, EyeOff, LogInIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isLoading, error } = useLogin();
+  const { setUser } = useAuth(); // Récupération de setUser depuis le contexte
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<LoginModel>({
     login: "",
     password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -39,27 +42,50 @@ export default function LoginPage() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError(null);
 
     if (!form.login || !form.password) {
-      toast.error("Tous les champs sont obligatoires");
+      setError("Tous les champs sont obligatoires");
       return;
     }
 
     try {
-      const userData = await login(form);
-      toast.success(MESSAGES.AUTH.LOGIN_SUCCESS);
-      
-      // Redirect to role-specific dashboard
-      const targetPath = `/dashboard/${userData.role.toLowerCase()}`;
-      router.push(targetPath);
-    } catch {
-      toast.error(error || "Erreur de connexion");
+      setIsLoading(true);
+
+      // 1. Appel au service de login
+      const response = await loginApi(form);
+
+      // 2. Extraction de l'utilisateur (Structure: response.data.data.user)
+      const userData = response.data;
+
+      if (userData) {
+        // 3. MISE À JOUR IMMÉDIATE DU CONTEXTE
+        // C'est cette ligne qui permet au dashboard de vous reconnaître sans refresh
+        setUser(userData);
+
+        toast.success("Connexion réussie");
+
+        // 4. Redirection vers le dashboard spécifique au rôle
+        const targetPath = `/dashboard/${userData.role.toLowerCase()}`;
+        router.push(targetPath);
+      } else {
+        throw new Error("Format de réponse utilisateur invalide");
+      }
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Erreur de connexion";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <div className="h-full flex items-center justify-center">
       <div className="w-full max-w-md px-4">
+        {" "}
+        {/* Changé w-xl par max-w-md pour le responsive */}
         <Card>
           <CardHeader>
             <CardTitle>Se connecter</CardTitle>

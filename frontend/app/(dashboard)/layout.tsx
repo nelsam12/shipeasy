@@ -3,12 +3,12 @@
 
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { useAuth } from "../context/auth.context";
-import { RequireAuth } from "../guards/require-auth";
+import { AppSidebar } from "@/src/shared/components/layouts/Sidebar";
+import { SidebarInset, SidebarProvider } from "@/src/shared/components/ui/sidebar";
+import { useAuth } from "@/src/features/auth/hooks";
+import { AuthGuard } from "@/src/shared/components/guards";
 import { Loader2 } from "lucide-react";
-import { DashboardHeader } from "@/components/dashboard-header"; // Ton composant ici
+import { DashboardHeader } from "@/components/dashboard-header";
 
 export default function DashboardLayout({
   children,
@@ -35,7 +35,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <RequireAuth>
+    <AuthGuard>
       <SidebarProvider>
         {user && <AppSidebar role={user.role} user={user} />}
 
@@ -48,6 +48,6 @@ export default function DashboardLayout({
           </main>
         </SidebarInset>
       </SidebarProvider>
-    </RequireAuth>
+    </AuthGuard>
   );
 }
