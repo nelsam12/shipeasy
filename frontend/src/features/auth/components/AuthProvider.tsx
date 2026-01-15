@@ -13,7 +13,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const user = await authService.getMe();
         setUser(user);
-      } catch (error) {
+      } catch {
         setUser(null);
       } finally {
         setLoading(false);

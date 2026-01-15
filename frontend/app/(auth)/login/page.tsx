@@ -46,13 +46,13 @@ export default function LoginPage() {
     }
 
     try {
-      const user = await login(form);
+      const userData = await login(form);
       toast.success(MESSAGES.AUTH.LOGIN_SUCCESS);
       
       // Redirect to role-specific dashboard
-      const targetPath = `/dashboard/${user.role.toLowerCase()}`;
+      const targetPath = `/dashboard/${userData.role.toLowerCase()}`;
       router.push(targetPath);
-    } catch (err) {
+    } catch {
       toast.error(error || "Erreur de connexion");
     }
   }
