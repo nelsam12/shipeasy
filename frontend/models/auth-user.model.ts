@@ -1,10 +1,10 @@
-import { role } from "./role.model";
+import { Role } from "./role.model";
 
 export interface AuthUser {
   id: string;
   email: string;
   fullName: string;
-  role: role;
+  role: Role;
   phone: string;
 }
 
