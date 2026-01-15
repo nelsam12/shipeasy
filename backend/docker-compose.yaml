@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:18
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer:5.4.1
+    restart: always
+    ports:
+      - "8080:8080"
