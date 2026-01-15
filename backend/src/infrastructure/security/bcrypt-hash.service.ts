@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { IHashService } from '../../../core/ports/services/hash.service.interface';
+import type { IHashService } from '../../../core/ports/services/hash.service';
 
 /**
  * Bcrypt Hash Service Implementation

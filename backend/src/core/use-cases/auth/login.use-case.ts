@@ -1,16 +1,10 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import {
-  IUserRepository,
-  USER_REPOSITORY,
-} from '../../ports/repositories/user.repository.interface';
-import {
-  HASH_SERVICE,
-  IHashService,
-} from '../../ports/services/hash.service.interface';
-import {
-  ITokenService,
-  TOKEN_SERVICE,
-} from '../../ports/services/token.service.interface';
+import type { IUserRepository } from '../../ports/repositories/user.repository';
+import { USER_REPOSITORY } from '../../ports/repositories/user.repository';
+import type { IHashService } from '../../ports/services/hash.service';
+import { HASH_SERVICE } from '../../ports/services/hash.service';
+import type { ITokenService } from '../../ports/services/token.service';
+import { TOKEN_SERVICE } from '../../ports/services/token.service';
 
 export interface LoginRequest {
   login: string;

@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../infrastructure/security/guards/jwt-auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import type { JwtUser } from '../../shared/types/request-with-user.type';
+import type { JwtUser } from '../../shared/types/request-with-user';
 import { LoginDto } from '../../application/dto/request/login.dto';
 import { RegisterDto } from '../../application/dto/request/register.dto';
 import type { Response } from 'express';
@@ -34,14 +34,14 @@ export class AuthController {
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  @ApiOperation({ summary: 'Récupérer le profil complet de l'utilisateur' })
+  @ApiOperation({ summary: 'Get current user profile' })
   async getMe(@CurrentUser() userPayload: JwtUser) {
     return this.getMeUseCase.execute(userPayload.userId);
   }
 
   @Post('login')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Connexion utilisateur' })
+  @ApiOperation({ summary: 'User login' })
   async login(
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -52,7 +52,7 @@ export class AuthController {
   }
 
   @Post('register')
-  @ApiOperation({ summary: 'Inscription d'un nouvel utilisateur' })
+  @ApiOperation({ summary: 'Register a new user' })
   async register(
     @Body() dto: RegisterDto,
     @Res({ passthrough: true }) res: Response,
@@ -64,7 +64,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Déconnexion' })
+  @ApiOperation({ summary: 'Logout' })
   logout(@Res({ passthrough: true }) response: Response) {
     response.cookie('access_token', '', {
       httpOnly: true,
@@ -74,7 +74,7 @@ export class AuthController {
       path: '/',
     });
 
-    return { success: true, message: 'Déconnecté' };
+    return { success: true, message: 'Logged out' };
   }
 
   private setCookie(res: Response, token: string) {

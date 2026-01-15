@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserOrmEntity } from './entities/user.orm-entity';
 import { TypeOrmUserRepository } from './repositories/user.repository';
-import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository.interface';
+import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository';
 
 /**
  * Database Module

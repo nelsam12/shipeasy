@@ -1,8 +1,6 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import {
-  IUserRepository,
-  USER_REPOSITORY,
-} from '../../ports/repositories/user.repository.interface';
+import type { IUserRepository } from '../../ports/repositories/user.repository';
+import { USER_REPOSITORY } from '../../ports/repositories/user.repository';
 
 export interface GetMeResponse {
   id: number;

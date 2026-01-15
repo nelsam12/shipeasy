@@ -5,8 +5,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import type { Response } from 'express';
-import { ApiError } from '../../../shared/interfaces/api-error.interface';
-import { ApiResponse } from '../../../shared/interfaces/api-response.interface';
+import { ApiError } from '../../../shared/interfaces/api-response';
+import { ApiResponse } from '../../../shared/interfaces/api-response';
 
 /**
  * HTTP Exception Filter

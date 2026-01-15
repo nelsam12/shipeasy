@@ -7,8 +7,8 @@ import { LoginUseCase } from '../../core/use-cases/auth/login.use-case';
 import { RegisterUseCase } from '../../core/use-cases/auth/register.use-case';
 import { GetMeUseCase } from '../../core/use-cases/auth/get-me.use-case';
 import { DatabaseModule } from '../../infrastructure/database/database.module';
-import { HASH_SERVICE } from '../../core/ports/services/hash.service.interface';
-import { TOKEN_SERVICE } from '../../core/ports/services/token.service.interface';
+import { HASH_SERVICE } from '../../core/ports/services/hash.service';
+import { TOKEN_SERVICE } from '../../core/ports/services/token.service';
 import { BcryptHashService } from '../../infrastructure/security/bcrypt-hash.service';
 import { JwtTokenService } from '../../infrastructure/security/jwt-token.service';
 import { JwtStrategy } from '../../infrastructure/security/jwt.strategy';
@@ -26,7 +26,7 @@ import { JwtStrategy } from '../../infrastructure/security/jwt.strategy';
       useFactory: (config: ConfigService) => ({
         secret: config.getOrThrow<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: config.get<string>('JWT_EXPIRES_IN', '1d'),
+          expiresIn: '1d',
         },
       }),
     }),

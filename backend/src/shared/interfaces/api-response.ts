@@ -1,5 +1,5 @@
-import { ApiError } from './api-error.interface';
-import { PaginationMeta } from './pagination-meta.interface';
+import { ApiError } from './api-error';
+import { PaginationMeta } from './pagination-meta';
 
 export interface ApiResponse<T> {
   statusCode: number;
