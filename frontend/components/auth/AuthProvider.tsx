@@ -21,7 +21,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(null);
       }
     } catch (error) {
-      console.error('Failed to refresh user:', error);
+      if (error instanceof Error && ! error.message.includes('Unauthorized')) {
+        console.error('Failed to refresh user:', error);
+      }
       setUser(null);
     } finally {
       setIsLoading(false);

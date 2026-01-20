@@ -1,27 +1,25 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import type { ITripRepository } from '../../ports/repositories/trip.repository';
-import { TRIP_REPOSITORY } from '../../ports/repositories/trip.repository';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  ITripRepository,
+  TRIP_REPOSITORY,
+} from '../../ports/repositories/trip.repository';
 import type { TripResponse } from './list-trips.use-case';
 
 /**
- * Get Trip Use Case
- * Retrieves a single trip by ID
+ * Get My Trips Use Case
+ * Retrieves all trips created by the authenticated GP
  */
 @Injectable()
-export class GetTripUseCase {
+export class GetMyTripsUseCase {
   constructor(
     @Inject(TRIP_REPOSITORY)
     private readonly tripRepository: ITripRepository,
   ) {}
 
-  async execute(tripId: number): Promise<TripResponse> {
-    const trip = await this.tripRepository.findById(tripId);
+  async execute(gpId: number): Promise<TripResponse[]> {
+    const trips = await this.tripRepository.findByGpId(gpId);
 
-    if (!trip) {
-      throw new NotFoundException('Trip not found');
-    }
-
-    return {
+    return trips.map((trip) => ({
       id: trip.id!,
       gpId: trip.gpId,
       departureLocation: {
@@ -41,6 +39,6 @@ export class GetTripUseCase {
       status: trip.status,
       createdAt: trip.createdAt!,
       updatedAt: trip.updatedAt!,
-    };
+    }));
   }
 }

@@ -37,7 +37,7 @@ export function Navbar() {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/search" className="text-sm font-medium">
+            <Link href="/search" title={"Rechercher"} className="text-sm font-medium">
               Rechercher un GP
             </Link>
             <Link href="/destinations" className="text-sm font-medium">

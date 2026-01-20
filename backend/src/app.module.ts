@@ -6,6 +6,7 @@ import { UserModule } from './modules/user/user.module';
 import { DatabaseModule } from './infrastructure/database/database.module';
 import { HttpExceptionFilter } from './presentation/filters/http-exception.filter';
 import { ApiResponseInterceptor } from './presentation/interceptors/api-response.interceptor';
+import { TripModule } from './modules/trip/trip.module';
 
 /**
  * Application Root Module
@@ -22,6 +23,7 @@ import { ApiResponseInterceptor } from './presentation/interceptors/api-response
     // Feature modules
     AuthModule,
     UserModule,
+    TripModule,
   ],
   providers: [
     // Global exception filter

@@ -70,6 +70,29 @@ const navigationMap: Record<string, NavItem[]> = {
       url: "/dashboard/gestionnaire/support",
       icon: Package,
     },
+    {
+      title: "Mes GPs placés",
+      url: "/dashboard/gp/list",
+      icon:  Users,
+    },
+  ],
+  [Role.ADMIN]: [
+    {
+      title: "Tableau de bord",
+      url:  "/dashboard/admin",
+      icon: LayoutDashboard,
+      isActive: true,
+    },
+    {
+      title:  "Tous les GPs",
+      url: "/dashboard/gp/list",
+      icon:  Users,
+    },
+    {
+      title: "Utilisateurs",
+      url: "/dashboard/admin/users",
+      icon: Users,
+    },
   ],
 };
 

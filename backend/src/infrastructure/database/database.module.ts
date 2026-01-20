@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserOrmEntity } from './entities/user.orm-entity';
 import { TypeOrmUserRepository } from './repositories/user.repository';
 import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository';
+import { TripOrmEntity } from './entities/trip.orm-entity';
 
 /**
  * Database Module
@@ -21,11 +22,11 @@ import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository';
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        entities: [UserOrmEntity],
+        entities: [UserOrmEntity, TripOrmEntity],
         synchronize: true, // Should be false in production
       }),
     }),
-    TypeOrmModule.forFeature([UserOrmEntity]),
+    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity]),
   ],
   providers: [
     {

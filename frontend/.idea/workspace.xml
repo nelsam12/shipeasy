@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c26172a-8c32-4ce6-9890-b7ca8769ce05" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/src/application/dto/request/create-trip.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/domain/entities/trip.entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/domain/enums/trip-status.enum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/domain/value-objects/location.vo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/ports/repositories/trip.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/create-trip.use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/get-my-trip-use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/get-trip-use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/list-active-trip-use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/list-trips.use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/core/use-cases/trip/search-trip.use-case.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/infrastructure/database/entities/trip.orm-entity.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/infrastructure/database/repositories/trip.repository.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/modules/trip/trip.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/presentation/controllers/trip. controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(dashboard)/dashboard/gp/create-trip/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(dashboard)/dashboard/gp/list/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(public)/search/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(public)/trips/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/gp/GPCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/trip/CreateTripForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/trip/LocationSelect.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/trip/SearchForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/trip/TripCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useCitySearch.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useContries.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useCreateTrip.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useGPs.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useMyTrips.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useSearchTrips.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/gp.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/location.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/trip.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/gp.type.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/trip.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/infrastructure/database/database.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/infrastructure/database/database.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/presentation/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/presentation/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(dashboard)/dashboard/gp/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(dashboard)/dashboard/gp/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/auth/AuthProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/auth/AuthProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/DashboardHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/DashboardHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/index.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="82" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="38J2t4l0u23tTzRKrgJWhg6iQ77" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/nelsam/projects/ecole/shipeasy/frontend/hooks",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/home/nelsam/projects/ecole/shipeasy/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hooks" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.242" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c26172a-8c32-4ce6-9890-b7ca8769ce05" name="Changes" comment="" />
+      <created>1768503565550</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768503565550</updated>
+      <workItem from="1768503566842" duration="4304000" />
+      <workItem from="1768552991038" duration="5202000" />
+      <workItem from="1768569460799" duration="10935000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
