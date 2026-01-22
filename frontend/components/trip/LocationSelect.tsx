@@ -102,7 +102,7 @@ export function LocationSelect({
                                     ) : (
                                         <div className="py-6 text-center text-sm">
                                             <p className="text-muted-foreground">
-                                                Aucune ville trouvée pour "{searchQuery}"
+                                                Aucune ville trouvée pour &quot;{searchQuery}&quot;
                                             </p>
                                         </div>
                                     )}

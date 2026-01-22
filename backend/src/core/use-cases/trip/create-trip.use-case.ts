@@ -63,7 +63,9 @@ export class CreateTripUseCase {
     // Verify user is a GP or GESTIONNAIRE
     const user = await this.userRepository.findById(command.gpId);
     if (!user || (user.role !== Role.GP && user.role !== Role.GESTIONNAIRE)) {
-      throw new ForbiddenException('Only GPs and GESTIONNAIREs can create trips');
+      throw new ForbiddenException(
+        'Only GPs and GESTIONNAIREs can create trips',
+      );
     }
 
     // Create location value objects

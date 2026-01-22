@@ -1,8 +1,4 @@
-import {
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import type { ITripRepository } from '../../ports/repositories/trip.repository';
 import { TRIP_REPOSITORY } from '../../ports/repositories/trip.repository';
 

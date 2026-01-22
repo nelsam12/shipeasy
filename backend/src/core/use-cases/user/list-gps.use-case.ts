@@ -33,7 +33,7 @@ export class ListGPsUseCase {
   async execute(query: ListGPsQuery = {}): Promise<GPResponse[]> {
     // Find all users with GP role
     const users = await this.userRepository.findAll();
-    
+
     // Filter by role GP
     let gps = users.filter((user) => user.role === Role.GP);
 

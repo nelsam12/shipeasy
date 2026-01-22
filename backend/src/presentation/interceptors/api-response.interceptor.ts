@@ -27,9 +27,10 @@ function isPaginatedResult<T>(value: unknown): value is PaginatedResult<T> {
  * Standardizes successful responses across the application
  */
 @Injectable()
-export class ApiResponseInterceptor<T>
-  implements NestInterceptor<T, ApiResponse<T>>
-{
+export class ApiResponseInterceptor<T> implements NestInterceptor<
+  T,
+  ApiResponse<T>
+> {
   intercept(
     context: ExecutionContext,
     next: CallHandler<T>,

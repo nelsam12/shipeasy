@@ -32,6 +32,15 @@ export const MESSAGES = {
     UNASSIGN_SUCCESS: "GP désassigné avec succès",
     UNASSIGN_ERROR: "Erreur lors de la désassignation du GP",
   },
+  VOYAGE: {
+    CREATE_SUCCESS: "Voyage créé avec succès",
+    CREATE_ERROR: "Erreur lors de la création du voyage",
+    SEARCH_ERROR: "Erreur lors de la recherche",
+    AFFECTER_SUCCESS: "GP affecté avec succès",
+    AFFECTER_ERROR: "Erreur lors de l'affectation du GP",
+    CHANGE_STATUT_SUCCESS: "Statut modifié avec succès",
+    CHANGE_STATUT_ERROR: "Erreur lors de la modification du statut",
+  },
   VALIDATION: {
     PHONE_INVALID: "Numéro de téléphone invalide",
     PASSWORD_MISMATCH: "Les mots de passe ne correspondent pas",
@@ -55,6 +64,15 @@ export const API_ENDPOINTS = {
     BY_ID: (id: number) => `/trips/${id}`,
     ASSIGN_GP: (id: number) => `/trips/${id}/assign-gp`,
     UNASSIGN_GP: (id: number) => `/trips/${id}/unassign-gp`,
+  },
+  VOYAGES: {
+    BASE: "/voyages",
+    SEARCH: "/voyages/search",
+    MES_VOYAGES: "/voyages/mes-voyages",
+    QUI_ME_SONT_AFFECTES: "/voyages/qui-me-sont-affectes",
+    BY_ID: (id: number) => `/voyages/${id}`,
+    AFFECTATIONS: (id: number) => `/voyages/${id}/affectations`,
+    CHANGE_STATUT: (id: number) => `/voyages/${id}/statut`,
   },
   USERS: {
     GPS: "/users/gps",

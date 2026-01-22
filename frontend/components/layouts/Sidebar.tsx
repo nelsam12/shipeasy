@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LayoutDashboard, Package, Users, Settings, Headset } from "lucide-react";
+import { LayoutDashboard, Package, Users, Settings, Headset, MessageSquare } from "lucide-react";
 
 import { NavMain } from "@/components/layouts/NavMain";
 import { NavUser } from "@/components/layouts/NavUser";
@@ -31,6 +31,11 @@ const navigationMap: Record<string, NavItem[]> = {
         { title: "Historique", url: "/dashboard/client/colis/liste" },
       ],
     },
+    {
+      title: "Messages",
+      url: "/dashboard/messages",
+      icon: MessageSquare,
+    },
   ],
   [Role.GP]: [
     {
@@ -38,6 +43,11 @@ const navigationMap: Record<string, NavItem[]> = {
       url: "/dashboard/gp",
       icon: LayoutDashboard,
       isActive: true,
+    },
+    {
+      title: "Voyages",
+      url: "/dashboard/gp/list",
+      icon: Package,
     },
     {
       title: "Cargaisons",
@@ -48,6 +58,11 @@ const navigationMap: Record<string, NavItem[]> = {
         { title: "Clients", url: "/dashboard/gp/clients" },
       ],
     },
+    {
+      title: "Messages",
+      url: "/dashboard/messages",
+      icon: MessageSquare,
+    },
   ],
   [Role.GESTIONNAIRE]: [
     {
@@ -55,6 +70,11 @@ const navigationMap: Record<string, NavItem[]> = {
       url: "/dashboard/gestionnaire",
       icon: LayoutDashboard,
       isActive: true,
+    },
+    {
+      title: "Voyages",
+      url: "/dashboard/gestionnaire/voyages",
+      icon: Package,
     },
     {
       title: "Utilisateurs",
@@ -72,7 +92,7 @@ const navigationMap: Record<string, NavItem[]> = {
       icon: Headset,
     },
     {
-      title: "Paramètres",
+      title: "Parametres",
       url: "/dashboard/gestionnaire/parametres",
       icon: Settings,
     },
