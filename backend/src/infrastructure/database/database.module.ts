@@ -5,6 +5,8 @@ import { UserOrmEntity } from './entities/user.orm-entity';
 import { TypeOrmUserRepository } from './repositories/user.repository';
 import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository';
 import { TripOrmEntity } from './entities/trip.orm-entity';
+import { VoyageOrmEntity } from './entities/voyage.orm-entity';
+import { AffectationVoyageOrmEntity } from './entities/affectation-voyage.orm-entity';
 
 /**
  * Database Module
@@ -22,11 +24,11 @@ import { TripOrmEntity } from './entities/trip.orm-entity';
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        entities: [UserOrmEntity, TripOrmEntity],
+        entities: [UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity],
         synchronize: true, // Should be false in production
       }),
     }),
-    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity]),
+    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity]),
   ],
   providers: [
     {
