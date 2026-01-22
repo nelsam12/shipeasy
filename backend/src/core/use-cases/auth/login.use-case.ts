@@ -64,7 +64,7 @@ export class LoginUseCase {
     }
 
     // 3. Generate token
-    const token = this.tokenService.generate({ userId: user.id! });
+    const token = this.tokenService.generate({ userId: user.id!, role: user.role });
 
     // 4. Return response
     return {

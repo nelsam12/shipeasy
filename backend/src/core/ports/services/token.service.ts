@@ -6,12 +6,12 @@ export interface ITokenService {
   /**
    * Generates a JWT token for a user
    */
-  generate(payload: { userId: number }): string;
+  generate(payload: { userId: number; role?: string }): string;
 
   /**
    * Verifies and decodes a JWT token
    */
-  verify(token: string): Promise<{ userId: number }>;
+  verify(token: string): Promise<{ userId: number; role?: string }>;
 }
 
 // Injection token for DI

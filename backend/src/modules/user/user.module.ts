@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../../infrastructure/database/database.module';
 import { FindUserUseCase } from '../../core/use-cases/user/find-user.use-case';
 import { DeleteUserUseCase } from '../../core/use-cases/user/delete-user.use-case';
+import { ListGPsUseCase } from '../../core/use-cases/user/list-gps.use-case';
+import { UserController } from '../../presentation/controllers/user.controller';
 
 /**
  * User Module
@@ -9,7 +11,8 @@ import { DeleteUserUseCase } from '../../core/use-cases/user/delete-user.use-cas
  */
 @Module({
   imports: [DatabaseModule],
-  providers: [FindUserUseCase, DeleteUserUseCase],
-  exports: [FindUserUseCase, DeleteUserUseCase],
+  controllers: [UserController],
+  providers: [FindUserUseCase, DeleteUserUseCase, ListGPsUseCase],
+  exports: [FindUserUseCase, DeleteUserUseCase, ListGPsUseCase],
 })
 export class UserModule {}
