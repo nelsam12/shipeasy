@@ -10,12 +10,12 @@ import { ITokenService } from '../../core/ports/services';
 export class JwtTokenService implements ITokenService {
   constructor(private readonly jwtService: JwtService) {}
 
-  generate(payload: { userId: number }): string {
-    return this.jwtService.sign({ sub: payload.userId });
+  generate(payload: { userId: number; role?: string }): string {
+    return this.jwtService.sign({ sub: payload.userId, role: payload.role });
   }
 
-  async verify(token: string): Promise<{ userId: number }> {
+  async verify(token: string): Promise<{ userId: number; role?: string }> {
     const decoded = await this.jwtService.verifyAsync(token);
-    return { userId: decoded.sub };
+    return { userId: decoded.sub, role: decoded.role };
   }
 }

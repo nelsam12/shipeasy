@@ -79,3 +79,29 @@ export function getTripById(id: number) {
         method: "GET",
     });
 }
+
+/**
+ * Assign a GP to a trip (GESTIONNAIRE/ADMIN only)
+ */
+export function assignGpToTrip(tripId: number, gpId: number) {
+    return http<ApiResponse<Trip>, { gpId: number }>(
+        API_ENDPOINTS.TRIPS.ASSIGN_GP(tripId),
+        {
+            method: "PATCH",
+            body: { gpId },
+            bodyType: BodyType.JSON,
+        }
+    );
+}
+
+/**
+ * Unassign a GP from a trip (GESTIONNAIRE/ADMIN only)
+ */
+export function unassignGpFromTrip(tripId: number) {
+    return http<ApiResponse<Trip>, undefined>(
+        API_ENDPOINTS.TRIPS.UNASSIGN_GP(tripId),
+        {
+            method: "PATCH",
+        }
+    );
+}

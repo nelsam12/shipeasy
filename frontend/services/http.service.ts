@@ -2,7 +2,7 @@ import { BodyType } from "@/lib/constants";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 type JsonBody = object;
 type HttpBody = JsonBody | FormData;
 

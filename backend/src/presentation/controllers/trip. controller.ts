@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Patch,
   Param,
   Query,
   UseGuards,
@@ -17,15 +18,21 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../infrastructure/security/guards/jwt-auth.guard';
+import { RolesGuard } from '../../infrastructure/security/guards/roles.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
+import { Roles } from '../decorators/roles.decorator';
 import type { JwtUser } from '../../shared';
+import { Role } from '../../core/domain/enums/role.enum';
 import { CreateTripDto } from '../../application/dto/request/create-trip.dto';
+import { AssignGpDto } from '../../application/dto/request/assign-gp.dto';
 import { CreateTripUseCase } from '../../core/use-cases/trip/create-trip.use-case';
 import { ListTripsUseCase } from '../../core/use-cases/trip/list-trips.use-case';
 import { ListActiveTripsUseCase } from '../../core/use-cases/trip/list-active-trip-use-case';
 import { SearchTripsUseCase } from '../../core/use-cases/trip/search-trip.use-case';
 import { GetTripUseCase } from '../../core/use-cases/trip/get-trip-use-case';
 import { GetMyTripsUseCase } from '../../core/use-cases/trip/get-my-trip-use-case';
+import { AssignGpToTripUseCase } from '../../core/use-cases/trip/assign-gp-to-trip.use-case';
+import { UnassignGpFromTripUseCase } from '../../core/use-cases/trip/unassign-gp-from-trip.use-case';
 
 /**
  * Trip Controller
@@ -41,6 +48,8 @@ export class TripController {
     private readonly searchTripsUseCase: SearchTripsUseCase,
     private readonly getTripUseCase: GetTripUseCase,
     private readonly getMyTripsUseCase: GetMyTripsUseCase,
+    private readonly assignGpToTripUseCase: AssignGpToTripUseCase,
+    private readonly unassignGpFromTripUseCase: UnassignGpFromTripUseCase,
   ) {}
 
   @ApiBearerAuth('access-token')
@@ -129,5 +138,37 @@ export class TripController {
   @ApiResponse({ status: 404, description: 'Trip not found' })
   async getTrip(@Param('id', ParseIntPipe) id: number) {
     return this.getTripUseCase.execute(id);
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.GESTIONNAIRE, Role.ADMIN)
+  @Patch(':id/assign-gp')
+  @ApiOperation({ summary: 'Assign a GP to a trip (GESTIONNAIRE/ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'GP assigned successfully' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  @ApiResponse({ status: 404, description: 'Trip or GP not found' })
+  async assignGpToTrip(
+    @Param('id', ParseIntPipe) tripId: number,
+    @Body() dto: AssignGpDto,
+  ) {
+    return this.assignGpToTripUseCase.execute({
+      tripId,
+      gpId: dto.gpId,
+    });
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.GESTIONNAIRE, Role.ADMIN)
+  @Patch(':id/unassign-gp')
+  @ApiOperation({
+    summary: 'Unassign a GP from a trip (GESTIONNAIRE/ADMIN only)',
+  })
+  @ApiResponse({ status: 200, description: 'GP unassigned successfully' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  @ApiResponse({ status: 404, description: 'Trip not found' })
+  async unassignGpFromTrip(@Param('id', ParseIntPipe) tripId: number) {
+    return this.unassignGpFromTripUseCase.execute({ tripId });
   }
 }

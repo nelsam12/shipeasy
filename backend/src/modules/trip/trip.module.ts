@@ -12,6 +12,8 @@ import { ListActiveTripsUseCase } from '../../core/use-cases/trip/list-active-tr
 import { SearchTripsUseCase } from '../../core/use-cases/trip/search-trip.use-case';
 import { GetTripUseCase } from '../../core/use-cases/trip/get-trip-use-case';
 import { GetMyTripsUseCase } from '../../core/use-cases/trip/get-my-trip-use-case';
+import { AssignGpToTripUseCase } from '../../core/use-cases/trip/assign-gp-to-trip.use-case';
+import { UnassignGpFromTripUseCase } from '../../core/use-cases/trip/unassign-gp-from-trip.use-case';
 
 /**
  * Trip Module
@@ -33,6 +35,8 @@ import { GetMyTripsUseCase } from '../../core/use-cases/trip/get-my-trip-use-cas
     SearchTripsUseCase,
     GetTripUseCase,
     GetMyTripsUseCase,
+    AssignGpToTripUseCase,
+    UnassignGpFromTripUseCase,
   ],
   exports: [TRIP_REPOSITORY, CreateTripUseCase],
 })

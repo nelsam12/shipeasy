@@ -7,26 +7,26 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import {Card, CardContent} from "@/components/ui/card";
-import {Clock, Loader2, RefreshCw, Search, UserCheck, Users, UserX} from "lucide-react";
+import {Loader2, RefreshCw, Search, Users} from "lucide-react";
 import {useAuth} from "@/hooks/useAuth";
 import {Role} from "@/types";
 
 export default function GPsListPage() {
     const {user} = useAuth();
-    const {gps, stats, isLoading, error, refetch} = useGPs();
+    const {gps, isLoading, error, refetch} = useGPs();
     const [search, setSearch] = useState("");
-    const [statusFilter, setStatusFilter] = useState<string>("all");
+    const [approvalFilter, setApprovalFilter] = useState<string>("all");
 
     function handleSearch() {
         refetch({
             search: search || undefined,
-            status: statusFilter !== "all" ? (statusFilter as any) : undefined,
+            isApproved: approvalFilter === "all" ? undefined : approvalFilter === "approved",
         });
     }
 
     function handleReset() {
         setSearch("");
-        setStatusFilter("all");
+        setApprovalFilter("all");
         refetch();
     }
 
@@ -54,7 +54,6 @@ export default function GPsListPage() {
     }
 
     const isGestionnaire = user?.role === Role.GESTIONNAIRE;
-    const isAdmin = user?.role === Role.ADMIN;
 
     return (
         <div className="space-y-6">
@@ -70,71 +69,6 @@ export default function GPsListPage() {
                 </p>
             </div>
 
-            {/* Stats Cards */}
-            {stats && (
-                <div className="grid gap-4 md:grid-cols-4">
-                    {/* Total */}
-                    <Card>
-                        <CardContent className="pt-6">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-primary/10 rounded-lg">
-                                    <Users className="h-5 w-5 text-primary"/>
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-bold">{stats.total}</p>
-                                    <p className="text-xs text-muted-foreground">Total GPs</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* Actifs */}
-                    <Card>
-                        <CardContent className="pt-6">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-green-500/10 rounded-lg">
-                                    <UserCheck className="h-5 w-5 text-green-600"/>
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-bold">{stats.active}</p>
-                                    <p className="text-xs text-muted-foreground">Actifs</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* Inactifs */}
-                    <Card>
-                        <CardContent className="pt-6">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-gray-500/10 rounded-lg">
-                                    <UserX className="h-5 w-5 text-gray-600"/>
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-bold">{stats.inactive}</p>
-                                    <p className="text-xs text-muted-foreground">Inactifs</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    {/* En attente */}
-                    <Card>
-                        <CardContent className="pt-6">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-amber-500/10 rounded-lg">
-                                    <Clock className="h-5 w-5 text-amber-600"/>
-                                </div>
-                                <div>
-                                    <p className="text-2xl font-bold">{stats.pending}</p>
-                                    <p className="text-xs text-muted-foreground">En attente</p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </div>
-            )}
-
             {/* Filtres */}
             <Card>
                 <CardContent className="pt-6">
@@ -142,23 +76,22 @@ export default function GPsListPage() {
                         {/* Recherche */}
                         <div className="flex-1">
                             <Input
-                                placeholder="Rechercher par nom, email, téléphone ou entreprise..."
+                                placeholder="Rechercher par nom, email ou entreprise..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                             />
                         </div>
 
-                        {/* Filtre statut */}
-                        <Select value={statusFilter} onValueChange={setStatusFilter}>
+                        {/* Filtre approbation */}
+                        <Select value={approvalFilter} onValueChange={setApprovalFilter}>
                             <SelectTrigger className="w-full md:w-[180px]">
                                 <SelectValue placeholder="Statut"/>
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="all">Tous les statuts</SelectItem>
-                                <SelectItem value="ACTIVE">Actifs</SelectItem>
-                                <SelectItem value="INACTIVE">Inactifs</SelectItem>
-                                <SelectItem value="PENDING">En attente</SelectItem>
+                                <SelectItem value="all">Tous</SelectItem>
+                                <SelectItem value="approved">Approuvés</SelectItem>
+                                <SelectItem value="pending">En attente</SelectItem>
                             </SelectContent>
                         </Select>
 
@@ -189,7 +122,7 @@ export default function GPsListPage() {
                             <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4"/>
                             <p className="text-lg font-medium mb-2">Aucun GP trouvé</p>
                             <p className="text-sm text-muted-foreground">
-                                {search || statusFilter !== "all"
+                                {search || approvalFilter !== "all"
                                     ? "Essayez de modifier vos critères de recherche"
                                     : "Aucun GP n'est encore enregistré dans le système"}
                             </p>
