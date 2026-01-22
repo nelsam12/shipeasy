@@ -27,6 +27,10 @@ export const MESSAGES = {
     CREATE_SUCCESS:  "Voyage créé avec succès",
     CREATE_ERROR: "Erreur lors de la création du voyage",
     SEARCH_ERROR: "Erreur lors de la recherche",
+    ASSIGN_SUCCESS: "GP assigné avec succès",
+    ASSIGN_ERROR: "Erreur lors de l'assignation du GP",
+    UNASSIGN_SUCCESS: "GP désassigné avec succès",
+    UNASSIGN_ERROR: "Erreur lors de la désassignation du GP",
   },
   VALIDATION: {
     PHONE_INVALID: "Numéro de téléphone invalide",
@@ -49,6 +53,11 @@ export const API_ENDPOINTS = {
     SEARCH:  "/trips/search",
     MY_TRIPS: "/trips/my-trips",
     BY_ID: (id: number) => `/trips/${id}`,
+    ASSIGN_GP: (id: number) => `/trips/${id}/assign-gp`,
+    UNASSIGN_GP: (id: number) => `/trips/${id}/unassign-gp`,
+  },
+  USERS: {
+    GPS: "/users/gps",
   },
 };
 

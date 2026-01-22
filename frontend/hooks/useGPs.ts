@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { getGPs, getGPsStats } from "@/services/gp.service";
-import {GetGPsQuery, GP, GPsStats} from "@/types/gp.type";
+import { getGPs } from "@/services/gp.service";
+import { GetGPsQuery, GP } from "@/types/gp.type";
 
 export function useGPs() {
     const [gps, setGps] = useState<GP[]>([]);
-    const [stats, setStats] = useState<GPsStats | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -13,13 +12,8 @@ export function useGPs() {
         setError(null);
 
         try {
-            const [gpsResponse, statsResponse] = await Promise. all([
-                getGPs(query),
-                getGPsStats(),
-            ]);
-
-            setGps(gpsResponse.data);
-            setStats(statsResponse.data);
+            const response = await getGPs(query);
+            setGps(response.data);
         } catch (err) {
             setError("Erreur lors du chargement des GPs");
             console.error(err);
@@ -34,7 +28,6 @@ export function useGPs() {
 
     return {
         gps,
-        stats,
         isLoading,
         error,
         refetch: fetchGPs,

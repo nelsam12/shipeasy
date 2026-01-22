@@ -3,23 +3,16 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, Calendar, Eye, Building, MapPin } from "lucide-react";
+import { Mail, Phone, Eye, Building, MapPin, CheckCircle, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {GP} from "@/types/gp.type";
+import { GP } from "@/types/gp.type";
 
 interface GPCardProps {
     gp: GP;
 }
 
-const statusConfig = {
-    ACTIVE: { label: "Actif", variant: "default" as const },
-    INACTIVE: { label: "Inactif", variant: "secondary" as const },
-    PENDING: { label: "En attente", variant: "outline" as const },
-};
-
-export function GPCard({ gp }:  GPCardProps) {
+export function GPCard({ gp }: GPCardProps) {
     const router = useRouter();
-    const status = statusConfig[gp.status];
 
     return (
         <Card className="hover:shadow-lg transition-shadow">
@@ -29,7 +22,17 @@ export function GPCard({ gp }:  GPCardProps) {
                         <h3 className="font-semibold text-lg">{gp.fullName}</h3>
                         <p className="text-sm text-muted-foreground">GP #{gp.id}</p>
                     </div>
-                    <Badge variant={status.variant}>{status.label}</Badge>
+                    {gp.isApproved ? (
+                        <Badge variant="default" className="flex items-center gap-1">
+                            <CheckCircle className="h-3 w-3" />
+                            Approuvé
+                        </Badge>
+                    ) : (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                            <XCircle className="h-3 w-3" />
+                            En attente
+                        </Badge>
+                    )}
                 </div>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -40,16 +43,18 @@ export function GPCard({ gp }:  GPCardProps) {
                 </div>
 
                 {/* Téléphone */}
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Phone className="h-4 w-4 shrink-0" />
-                    <span>{gp.phone}</span>
-                </div>
+                {gp.phone && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Phone className="h-4 w-4 shrink-0" />
+                        <span>{gp.phone}</span>
+                    </div>
+                )}
 
                 {/* Entreprise */}
                 {gp.companyName && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Building className="h-4 w-4 shrink-0" />
-                        <span className="truncate">{gp. companyName}</span>
+                        <span className="truncate">{gp.companyName}</span>
                     </div>
                 )}
 
@@ -61,34 +66,11 @@ export function GPCard({ gp }:  GPCardProps) {
                     </div>
                 )}
 
-                {/* Date d'inscription */}
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4 shrink-0" />
-                    <span>
-            Inscrit le {new Date(gp.createdAt).toLocaleDateString("fr-FR")}
-          </span>
-                </div>
-
-                {/* Stats voyages */}
-                {(gp.totalTrips !== undefined || gp.activeTrips !== undefined) && (
-                    <div className="pt-3 border-t">
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                            {gp.totalTrips !== undefined && (
-                                <div className="text-center p-2 bg-muted/50 rounded">
-                                    <div className="font-bold text-lg">{gp.totalTrips}</div>
-                                    <div className="text-xs text-muted-foreground">Voyages</div>
-                                </div>
-                            )}
-                            {gp. activeTrips !== undefined && (
-                                <div className="text-center p-2 bg-green-50 dark:bg-green-950/20 rounded">
-                                    <div className="font-bold text-lg text-green-600">
-                                        {gp.activeTrips}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">Actifs</div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                {/* Description */}
+                {gp.description && (
+                    <p className="text-sm text-muted-foreground line-clamp-2 pt-2 border-t">
+                        {gp.description}
+                    </p>
                 )}
 
                 {/* Bouton voir détails */}
