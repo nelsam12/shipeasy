@@ -92,8 +92,9 @@ export function CreateVoyageForm() {
       await create(data);
       toast.success(MESSAGES.VOYAGE.CREATE_SUCCESS);
       router.push(ROUTES.DASHBOARD.GP);
-    } catch (error) {
-      toast.error(MESSAGES.VOYAGE.CREATE_ERROR);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : MESSAGES.VOYAGE.CREATE_ERROR;
+      toast.error(errorMessage);
     }
   }
 

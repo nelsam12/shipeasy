@@ -28,6 +28,7 @@ export function useAffectationsVoyage(voyageId: number) {
     if (voyageId) {
       fetchAffectations();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voyageId]);
 
   return { affectations, isLoading, error, refetch: fetchAffectations };

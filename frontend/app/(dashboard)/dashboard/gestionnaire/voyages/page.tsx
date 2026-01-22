@@ -90,8 +90,9 @@ export default function GestionnaireVoyagesPage() {
       toast.success(MESSAGES.VOYAGE.AFFECTER_SUCCESS);
       setIsAffectationDialogOpen(false);
       refetch();
-    } catch (err) {
-      toast.error(MESSAGES.VOYAGE.AFFECTER_ERROR);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Erreur lors de l'affectation";
+      toast.error(errorMessage);
     }
   }
 
@@ -100,8 +101,9 @@ export default function GestionnaireVoyagesPage() {
       await changeStatut(voyageId, { statut: newStatut });
       toast.success(MESSAGES.VOYAGE.CHANGE_STATUT_SUCCESS);
       refetch();
-    } catch (err) {
-      toast.error(MESSAGES.VOYAGE.CHANGE_STATUT_ERROR);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Erreur lors de la modification du statut";
+      toast.error(errorMessage);
     }
   }
 

@@ -26,6 +26,7 @@ export function useVoyages(initialFilters?: SearchVoyagesQuery) {
 
   useEffect(() => {
     fetchVoyages(initialFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { voyages, isLoading, error, refetch: fetchVoyages };

@@ -4,7 +4,7 @@ import { useMesVoyages } from "@/hooks/useMesVoyages";
 import { useVoyagesAffectes } from "@/hooks/useVoyagesAffectes";
 import { VoyageCard } from "@/components/voyage/VoyageCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, Plus, PackagePlus, PackageCheck } from "lucide-react";
 import Link from "next/link";

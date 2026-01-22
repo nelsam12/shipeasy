@@ -1,8 +1,4 @@
-export interface Location {
-  city: string;
-  country: string;
-  flag: string;
-}
+import { Location } from "./trip.types";
 
 export enum StatutVoyage {
   BROUILLON = "BROUILLON",
