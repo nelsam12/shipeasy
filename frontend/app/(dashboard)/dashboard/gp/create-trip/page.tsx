@@ -5,7 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { CreateTripForm } from "@/components/trip/CreateTripForm";
+import { CreateVoyageForm } from "@/components/voyage/CreateVoyageForm";
 import { ArrowLeft, Plane, TrendingUp, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -28,9 +28,9 @@ export default function CreateTripPage() {
                             <Plane className="h-4 w-4 text-primary" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold">Créer un voyage</h1>
+                            <h1 className="text-xl font-bold">Creer un voyage</h1>
                             <p className="text-xs text-muted-foreground">
-                                Publiez votre trajet et gagnez de l'argent
+                                Publiez votre trajet et gagnez de l&apos;argent
                             </p>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ export default function CreateTripPage() {
                 {/* Contenu principal */}
                 <div className="grid gap-4 lg:grid-cols-12 flex-1 overflow-hidden">
                     {/* Formulaire - 8 colonnes */}
-                    <div className="lg: col-span-8 overflow-y-auto pr-2">
+                    <div className="lg:col-span-8 overflow-y-auto pr-2">
                         <Card className="shadow-sm h-fit">
                             <CardHeader className="pb-3">
                                 <CardTitle className="text-base">Informations du voyage</CardTitle>
@@ -48,13 +48,13 @@ export default function CreateTripPage() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <CreateTripForm />
+                                <CreateVoyageForm />
                             </CardContent>
                         </Card>
                     </div>
 
                     {/* Sidebar - 4 colonnes */}
-                    <div className="lg: col-span-4 space-y-3 overflow-y-auto">
+                    <div className="lg:col-span-4 space-y-3 overflow-y-auto">
                         {/* Conseils */}
                         <Card className="shadow-sm">
                             <CardHeader className="pb-2">
@@ -67,19 +67,19 @@ export default function CreateTripPage() {
                                 <div className="flex gap-2">
                                     <div className="w-1 bg-primary rounded shrink-0" />
                                     <p className="text-muted-foreground">
-                                        Indiquez clairement vos dates de départ
+                                        Indiquez clairement vos dates de depart
                                     </p>
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="w-1 bg-primary rounded shrink-0" />
                                     <p className="text-muted-foreground">
-                                        Prix compétitif = plus de réservations
+                                        Prix competitif = plus de reservations
                                     </p>
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="w-1 bg-primary rounded shrink-0" />
                                     <p className="text-muted-foreground">
-                                        Mentionnez les types de colis acceptés
+                                        Mentionnez les types de colis acceptes
                                     </p>
                                 </div>
                             </CardContent>
@@ -116,7 +116,7 @@ export default function CreateTripPage() {
                             <CardContent className="pt-4 pb-4">
                                 <p className="text-xs text-muted-foreground">
                                     💡 <span className="font-medium text-foreground">Astuce :</span> Les descriptions
-                                    détaillées reçoivent 3x plus de réservations
+                                    detaillees recoivent 3x plus de reservations
                                 </p>
                             </CardContent>
                         </Card>

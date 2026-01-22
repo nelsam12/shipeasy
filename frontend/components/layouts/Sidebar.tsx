@@ -40,6 +40,11 @@ const navigationMap: Record<string, NavItem[]> = {
       isActive: true,
     },
     {
+      title: "Voyages",
+      url: "/dashboard/gp/list",
+      icon: Package,
+    },
+    {
       title: "Cargaisons",
       url: "/dashboard/gp/cargaisons",
       icon: Package,
@@ -57,6 +62,11 @@ const navigationMap: Record<string, NavItem[]> = {
       isActive: true,
     },
     {
+      title: "Voyages",
+      url: "/dashboard/gestionnaire/voyages",
+      icon: Package,
+    },
+    {
       title: "Utilisateurs",
       url: "/dashboard/gestionnaire/utilisateurs",
       icon: Users,
@@ -72,7 +82,7 @@ const navigationMap: Record<string, NavItem[]> = {
       icon: Headset,
     },
     {
-      title: "Paramètres",
+      title: "Parametres",
       url: "/dashboard/gestionnaire/parametres",
       icon: Settings,
     },
