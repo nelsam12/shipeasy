@@ -3,7 +3,6 @@ import {
   Conversation,
   CreateConversationDto,
   Message,
-  SendMessageDto,
 } from "@/types/chat.types";
 
 const API_URL = "/conversations";
@@ -61,9 +60,9 @@ export const chatService = {
   sendMessage: async (
     conversationId: number,
     content: string,
-    piecesJointes?: any[]
+    piecesJointes?: Array<{ nom: string; url: string; type: string }>
   ): Promise<Message> => {
-    return http<Message, { content: string; piecesJointes?: any[] }>(
+    return http<Message, { content: string; piecesJointes?: Array<{ nom: string; url: string; type: string }> }>(
       `${API_URL}/${conversationId}/messages`,
       {
         method: "POST",

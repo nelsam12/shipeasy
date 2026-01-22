@@ -1,18 +1,23 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { socketService } from "@/services/socket.service";
-import Cookies from "js-cookie";
 
 /**
  * Hook to manage socket connection
  */
 export const useSocket = () => {
-  const socketRef = useRef(socketService);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get("accessToken");
+    // Get token from cookie
+    const token = typeof window !== 'undefined' 
+      ? document.cookie.split('; ').find(row => row.startsWith('access_token='))?.split('=')[1]
+      : undefined;
     
-    if (token && !socketRef.current.isConnected()) {
-      socketRef.current.connect(token);
+    if (token && !socketService.isConnected()) {
+      socketService.connect(token);
+      setIsConnected(true);
+    } else if (socketService.isConnected()) {
+      setIsConnected(true);
     }
 
     return () => {
@@ -21,7 +26,7 @@ export const useSocket = () => {
   }, []);
 
   return {
-    socket: socketRef.current,
-    isConnected: socketRef.current.isConnected(),
+    socket: socketService,
+    isConnected,
   };
 };

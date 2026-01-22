@@ -42,7 +42,7 @@ export default function MessagesPage() {
     }
   }, [selectedConversationId, user]);
 
-  const handleSelectConversation = (conversation: any) => {
+  const handleSelectConversation = (conversation: Conversation) => {
     setSelectedConversationId(conversation.id);
     setShowMobileList(false);
   };

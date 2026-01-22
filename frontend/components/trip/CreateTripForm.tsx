@@ -92,7 +92,7 @@ export function CreateTripForm() {
             await create(data);
             toast.success(MESSAGES.TRIP. CREATE_SUCCESS);
             router.push(ROUTES.DASHBOARD. GP);
-        } catch (error) {
+        } catch {
             toast.error(MESSAGES.TRIP.CREATE_ERROR);
         }
     }

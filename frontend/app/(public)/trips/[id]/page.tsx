@@ -22,7 +22,7 @@ export default function TripDetailPage() {
             try {
                 const response = await getTripById(Number(params.id));
                 setTrip(response.data);
-            } catch (err) {
+            } catch {
                 setError("Voyage introuvable");
             } finally {
                 setIsLoading(false);
@@ -145,7 +145,7 @@ export default function TripDetailPage() {
                     {/* Action button */}
                     {trip.status === "ACTIVE" && (
                         <Button className="w-full" size="lg">
-                            Réserver de l'espace
+                            Réserver de l&apos;espace
                         </Button>
                     )}
                 </CardContent>

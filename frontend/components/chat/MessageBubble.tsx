@@ -1,4 +1,4 @@
-import { Message, PieceJointe } from "@/types/chat.types";
+import { Message } from "@/types/chat.types";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Check, CheckCheck } from "lucide-react";
