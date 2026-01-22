@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LayoutDashboard, Package, Users } from "lucide-react";
+import { LayoutDashboard, Package, Users, Settings, Headset } from "lucide-react";
 
 import { NavMain } from "@/components/layouts/NavMain";
 import { NavUser } from "@/components/layouts/NavUser";
@@ -59,21 +59,22 @@ const navigationMap: Record<string, NavItem[]> = {
     {
       title: "Utilisateurs",
       url: "/dashboard/gestionnaire/utilisateurs",
-      icon: Users, // Importez 'Users' de lucide-react
+      icon: Users,
       items: [
-        { title: "Validation GP", url: "/dashboard/gestionnaire/approbations" },
-        { title: "Liste Clients", url: "/dashboard/gestionnaire/clients" },
+        { title: "GPs", url: "/dashboard/gestionnaire/gps" },
+        { title: "Approbations GP", url: "/dashboard/gestionnaire/gps/approbations" },
+        { title: "Clients", url: "/dashboard/gestionnaire/clients" },
       ],
     },
     {
-      title: "Litiges & Support",
+      title: "Support & Litiges",
       url: "/dashboard/gestionnaire/support",
-      icon: Package,
+      icon: Headset,
     },
     {
-      title: "Mes GPs placés",
-      url: "/dashboard/gp/list",
-      icon:  Users,
+      title: "Paramètres",
+      url: "/dashboard/gestionnaire/parametres",
+      icon: Settings,
     },
   ],
   [Role.ADMIN]: [
