@@ -206,11 +206,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       return authHeader.substring(7);
     }
 
-    // Try cookies
+    // Try cookies - check both naming conventions for backward compatibility
     const cookies = client.handshake.headers?.cookie;
     if (cookies) {
-      const tokenMatch = cookies.match(/accessToken=([^;]+)/);
-      if (tokenMatch) return tokenMatch[1];
+      const accessTokenMatch = cookies.match(/access_token=([^;]+)/);
+      if (accessTokenMatch) return accessTokenMatch[1];
+      
+      const altTokenMatch = cookies.match(/accessToken=([^;]+)/);
+      if (altTokenMatch) return altTokenMatch[1];
     }
 
     throw new UnauthorizedException('No token provided');

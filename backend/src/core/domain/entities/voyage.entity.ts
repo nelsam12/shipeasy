@@ -35,7 +35,10 @@ export class Voyage {
       throw new Error('Price per kg cannot be negative');
     }
 
-    if (this.departureDate < new Date()) {
+    // Allow departure dates from today onwards (with 1-hour grace period for timezone differences)
+    const now = new Date();
+    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+    if (this.departureDate < oneHourAgo) {
       throw new Error('Departure date cannot be in the past');
     }
 

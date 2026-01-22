@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, MessageSquare } from "lucide-react";
 import { socketService } from "@/services/socket.service";
+import type { Conversation } from "@/types/chat.types";
 import { chatService } from "@/services/chat.service";
 
 export default function MessagesPage() {
