@@ -65,7 +65,7 @@ export default function GestionnaireVoyagesPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-100 gap-4">
+      <div className="flex flex-col items-center justify-center min-h-96 gap-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <p className="text-sm text-muted-foreground">
           Chargement des voyages...
@@ -76,7 +76,7 @@ export default function GestionnaireVoyagesPage() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-100 gap-4">
+      <div className="flex flex-col items-center justify-center min-h-96 gap-4">
         <div className="text-center">
           <p className="text-red-500 mb-4">{error}</p>
           <Button onClick={() => refetch()}>

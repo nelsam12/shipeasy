@@ -19,7 +19,10 @@ export interface UnassignGpResponse {
 
 /**
  * Unassign GP from Trip Use Case
- * Handles the removal of a GP assignment from a trip
+ * Note: In the current architecture, trips are created by GPs and gpId represents the creator.
+ * This use case currently doesn't modify the trip, as removing the creator would break the data model.
+ * For a full implementation, consider adding a separate 'assignedGpId' field to distinguish
+ * between creator and assigned GP.
  */
 @Injectable()
 export class UnassignGpFromTripUseCase {
@@ -35,12 +38,8 @@ export class UnassignGpFromTripUseCase {
       throw new NotFoundException('Trip not found');
     }
 
-    // 2. Update trip to remove gpId assignment (keeping original gpId as creator)
-    // Note: This implementation keeps the original gpId since trips are created by GPs
-    // If you want to allow nulling the gpId, adjust the Trip entity validation
-    
-    // For now, we'll just return the trip as-is since gpId is the creator
-    // A more complex implementation might have separate createdBy and assignedGp fields
+    // 2. In the current implementation, gpId is the creator and cannot be unassigned
+    // If separate assignment tracking is needed, modify the Trip entity to include assignedGpId
 
     // 3. Return response
     return {
