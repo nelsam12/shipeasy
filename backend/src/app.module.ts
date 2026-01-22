@@ -8,6 +8,7 @@ import { HttpExceptionFilter } from './presentation/filters/http-exception.filte
 import { ApiResponseInterceptor } from './presentation/interceptors/api-response.interceptor';
 import { TripModule } from './modules/trip/trip.module';
 import { VoyageModule } from './modules/voyage/voyage.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 /**
  * Application Root Module
@@ -26,6 +27,7 @@ import { VoyageModule } from './modules/voyage/voyage.module';
     UserModule,
     TripModule,
     VoyageModule,
+    ChatModule,
   ],
   providers: [
     // Global exception filter

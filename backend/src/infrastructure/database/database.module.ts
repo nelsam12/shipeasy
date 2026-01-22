@@ -7,6 +7,8 @@ import { USER_REPOSITORY } from '../../core/ports/repositories/user.repository';
 import { TripOrmEntity } from './entities/trip.orm-entity';
 import { VoyageOrmEntity } from './entities/voyage.orm-entity';
 import { AffectationVoyageOrmEntity } from './entities/affectation-voyage.orm-entity';
+import { ConversationOrmEntity } from './entities/conversation.orm-entity';
+import { MessageOrmEntity } from './entities/message.orm-entity';
 
 /**
  * Database Module
@@ -24,11 +26,11 @@ import { AffectationVoyageOrmEntity } from './entities/affectation-voyage.orm-en
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        entities: [UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity],
+        entities: [UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity, ConversationOrmEntity, MessageOrmEntity],
         synchronize: true, // Should be false in production
       }),
     }),
-    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity]),
+    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity, ConversationOrmEntity, MessageOrmEntity]),
   ],
   providers: [
     {

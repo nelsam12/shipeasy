@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LayoutDashboard, Package, Users, Settings, Headset } from "lucide-react";
+import { LayoutDashboard, Package, Users, Settings, Headset, MessageSquare } from "lucide-react";
 
 import { NavMain } from "@/components/layouts/NavMain";
 import { NavUser } from "@/components/layouts/NavUser";
@@ -31,6 +31,11 @@ const navigationMap: Record<string, NavItem[]> = {
         { title: "Historique", url: "/dashboard/client/colis/liste" },
       ],
     },
+    {
+      title: "Messages",
+      url: "/dashboard/messages",
+      icon: MessageSquare,
+    },
   ],
   [Role.GP]: [
     {
@@ -52,6 +57,11 @@ const navigationMap: Record<string, NavItem[]> = {
         { title: "Arrivages", url: "/dashboard/gp/arrivages" },
         { title: "Clients", url: "/dashboard/gp/clients" },
       ],
+    },
+    {
+      title: "Messages",
+      url: "/dashboard/messages",
+      icon: MessageSquare,
     },
   ],
   [Role.GESTIONNAIRE]: [
