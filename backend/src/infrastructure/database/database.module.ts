@@ -26,11 +26,25 @@ import { MessageOrmEntity } from './entities/message.orm-entity';
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        entities: [UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity, ConversationOrmEntity, MessageOrmEntity],
+        entities: [
+          UserOrmEntity,
+          TripOrmEntity,
+          VoyageOrmEntity,
+          AffectationVoyageOrmEntity,
+          ConversationOrmEntity,
+          MessageOrmEntity,
+        ],
         synchronize: true, // Should be false in production
       }),
     }),
-    TypeOrmModule.forFeature([UserOrmEntity, TripOrmEntity, VoyageOrmEntity, AffectationVoyageOrmEntity, ConversationOrmEntity, MessageOrmEntity]),
+    TypeOrmModule.forFeature([
+      UserOrmEntity,
+      TripOrmEntity,
+      VoyageOrmEntity,
+      AffectationVoyageOrmEntity,
+      ConversationOrmEntity,
+      MessageOrmEntity,
+    ]),
   ],
   providers: [
     {

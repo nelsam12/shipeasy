@@ -95,7 +95,10 @@ export class RegisterUseCase {
     const savedUser = await this.userRepository.save(user);
 
     // 7. Generate token
-    const token = this.tokenService.generate({ userId: savedUser.id!, role: savedUser.role });
+    const token = this.tokenService.generate({
+      userId: savedUser.id!,
+      role: savedUser.role,
+    });
 
     // 8. Return response
     return {

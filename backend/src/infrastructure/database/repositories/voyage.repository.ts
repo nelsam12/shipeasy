@@ -24,12 +24,16 @@ export class TypeOrmVoyageRepository implements IVoyageRepository {
   }
 
   async findByGpCreateurId(gpId: number): Promise<Voyage[]> {
-    const entities = await this.repository.find({ where: { gpCreateurId: gpId } });
+    const entities = await this.repository.find({
+      where: { gpCreateurId: gpId },
+    });
     return entities.map((entity) => this.toDomain(entity));
   }
 
   async findByGpCourantId(gpId: number): Promise<Voyage[]> {
-    const entities = await this.repository.find({ where: { gpCourantId: gpId } });
+    const entities = await this.repository.find({
+      where: { gpCourantId: gpId },
+    });
     return entities.map((entity) => this.toDomain(entity));
   }
 
@@ -54,9 +58,12 @@ export class TypeOrmVoyageRepository implements IVoyageRepository {
     const query = this.repository.createQueryBuilder('voyage');
 
     if (departureCity) {
-      query.andWhere('LOWER(voyage.departure_city) LIKE LOWER(:departureCity)', {
-        departureCity: `%${departureCity}%`,
-      });
+      query.andWhere(
+        'LOWER(voyage.departure_city) LIKE LOWER(:departureCity)',
+        {
+          departureCity: `%${departureCity}%`,
+        },
+      );
     }
 
     if (arrivalCity) {

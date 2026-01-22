@@ -15,7 +15,7 @@ export class GetVoyageUseCase {
 
   async execute(id: number) {
     const voyage = await this.voyageRepository.findById(id);
-    
+
     if (!voyage) {
       throw new NotFoundException('Voyage not found');
     }

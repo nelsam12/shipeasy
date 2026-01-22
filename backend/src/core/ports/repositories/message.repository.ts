@@ -13,7 +13,11 @@ export interface IMessageRepository {
   /**
    * Finds all messages for a conversation
    */
-  findByConversationId(conversationId: number, limit?: number, offset?: number): Promise<Message[]>;
+  findByConversationId(
+    conversationId: number,
+    limit?: number,
+    offset?: number,
+  ): Promise<Message[]>;
 
   /**
    * Saves a message (create or update)
@@ -28,7 +32,10 @@ export interface IMessageRepository {
   /**
    * Marks all messages in a conversation as read for a specific user
    */
-  markAllAsReadInConversation(conversationId: number, userId: number): Promise<void>;
+  markAllAsReadInConversation(
+    conversationId: number,
+    userId: number,
+  ): Promise<void>;
 
   /**
    * Counts unread messages in a conversation for a specific user

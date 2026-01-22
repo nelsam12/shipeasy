@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException, ForbiddenException, BadRequestException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import type { IVoyageRepository } from '../../ports/repositories/voyage.repository';
 import { VOYAGE_REPOSITORY } from '../../ports/repositories/voyage.repository';
 import type { IAffectationVoyageRepository } from '../../ports/repositories/affectation-voyage.repository';
@@ -6,7 +11,6 @@ import { AFFECTATION_VOYAGE_REPOSITORY } from '../../ports/repositories/affectat
 import type { IUserRepository } from '../../ports/repositories';
 import { USER_REPOSITORY } from '../../ports/repositories';
 import { Role } from '../../domain/enums/role.enum';
-import { StatutVoyage } from '../../domain/enums/statut-voyage.enum';
 import { AffectationVoyage } from '../../domain/entities/affectation-voyage.entity';
 
 export interface AffecterVoyageCommand {

@@ -28,7 +28,8 @@ export class MarkMessagesReadUseCase {
 
   async execute(conversationId: number, userId: number): Promise<void> {
     // Validate conversation exists
-    const conversation = await this.conversationRepository.findById(conversationId);
+    const conversation =
+      await this.conversationRepository.findById(conversationId);
 
     if (!conversation) {
       throw new NotFoundException('Conversation not found');

@@ -36,7 +36,10 @@ export interface IVoyageRepository {
   /**
    * Searches voyages by departure and/or arrival location
    */
-  searchVoyages(departureCity?: string, arrivalCity?: string): Promise<Voyage[]>;
+  searchVoyages(
+    departureCity?: string,
+    arrivalCity?: string,
+  ): Promise<Voyage[]>;
 
   /**
    * Saves a new voyage or updates an existing one

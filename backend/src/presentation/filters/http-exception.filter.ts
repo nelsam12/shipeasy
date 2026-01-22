@@ -7,7 +7,6 @@ import {
 import type { Response } from 'express';
 import { ApiError, ApiResponse } from '../../shared';
 
-
 /**
  * HTTP Exception Filter
  * Standardizes error responses across the application

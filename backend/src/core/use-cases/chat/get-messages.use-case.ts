@@ -47,7 +47,8 @@ export class GetMessagesUseCase {
     offset = 0,
   ): Promise<MessageResponse[]> {
     // Validate conversation exists
-    const conversation = await this.conversationRepository.findById(conversationId);
+    const conversation =
+      await this.conversationRepository.findById(conversationId);
 
     if (!conversation) {
       throw new NotFoundException('Conversation not found');

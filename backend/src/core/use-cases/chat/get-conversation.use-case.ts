@@ -34,7 +34,8 @@ export class GetConversationUseCase {
     conversationId: number,
     userId: number,
   ): Promise<GetConversationResponse> {
-    const conversation = await this.conversationRepository.findById(conversationId);
+    const conversation =
+      await this.conversationRepository.findById(conversationId);
 
     if (!conversation) {
       throw new NotFoundException('Conversation not found');

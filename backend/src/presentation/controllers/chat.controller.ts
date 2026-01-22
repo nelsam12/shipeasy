@@ -8,7 +8,12 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiTags,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../infrastructure/security/guards/jwt-auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import type { JwtUser } from '../../shared/types/request-with-user';
@@ -41,10 +46,7 @@ export class ChatController {
 
   @Post()
   @ApiOperation({ summary: 'Create or get existing conversation' })
-  async createConversation(
-    @Body() dto: CreateConversationDto,
-    @CurrentUser() user: JwtUser,
-  ) {
+  async createConversation(@Body() dto: CreateConversationDto) {
     return this.createConversationUseCase.execute(dto);
   }
 

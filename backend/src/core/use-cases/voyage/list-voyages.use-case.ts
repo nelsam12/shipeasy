@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import type { IVoyageRepository } from '../../ports/repositories/voyage.repository';
 import { VOYAGE_REPOSITORY } from '../../ports/repositories/voyage.repository';
 import { StatutVoyage } from '../../domain/enums/statut-voyage.enum';
+import type { Voyage } from '../../domain/entities/voyage.entity';
 
 export interface ListVoyagesQuery {
   gpId?: number;
@@ -20,7 +21,7 @@ export class ListVoyagesUseCase {
   ) {}
 
   async execute(query?: ListVoyagesQuery) {
-    let voyages;
+    let voyages: Voyage[];
 
     // Apply filters if provided
     if (query?.gpId) {

@@ -13,7 +13,10 @@ export interface IConversationRepository {
   /**
    * Finds a conversation between a client and a GP
    */
-  findByClientAndGp(clientId: number, gpId: number): Promise<Conversation | null>;
+  findByClientAndGp(
+    clientId: number,
+    gpId: number,
+  ): Promise<Conversation | null>;
 
   /**
    * Finds all conversations for a user (as client or GP)

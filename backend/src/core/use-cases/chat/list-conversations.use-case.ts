@@ -33,7 +33,8 @@ export class ListConversationsUseCase {
   ) {}
 
   async execute(userId: number): Promise<ConversationListItem[]> {
-    const conversations = await this.conversationRepository.findByUserId(userId);
+    const conversations =
+      await this.conversationRepository.findByUserId(userId);
 
     // Get unread count for each conversation
     const conversationsWithUnread = await Promise.all(

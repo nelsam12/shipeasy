@@ -183,7 +183,9 @@ export class VoyageController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.GESTIONNAIRE, Role.ADMIN)
   @Post(':id/affectations')
-  @ApiOperation({ summary: 'Assign a GP to a voyage (GESTIONNAIRE/ADMIN only)' })
+  @ApiOperation({
+    summary: 'Assign a GP to a voyage (GESTIONNAIRE/ADMIN only)',
+  })
   @ApiResponse({ status: 200, description: 'GP assigned successfully' })
   @ApiResponse({ status: 403, description: 'Insufficient permissions' })
   @ApiResponse({ status: 404, description: 'Voyage or GP not found' })

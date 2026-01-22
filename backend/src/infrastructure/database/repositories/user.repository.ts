@@ -6,7 +6,6 @@ import { User } from '../../../core/domain/entities/user.entity';
 import { UserOrmEntity } from '../entities/user.orm-entity';
 import { Email } from '../../../core/domain/value-objects/email.vo';
 import { Phone } from '../../../core/domain/value-objects/phone.vo';
-import { Password } from '../../../core/domain/value-objects/password.vo';
 
 /**
  * TypeORM User Repository Implementation

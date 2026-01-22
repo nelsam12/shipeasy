@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull } from 'typeorm';
 import type { IAffectationVoyageRepository } from '../../../core/ports/repositories/affectation-voyage.repository';
@@ -21,7 +21,9 @@ export class TypeOrmAffectationVoyageRepository implements IAffectationVoyageRep
     return entity ? this.toDomain(entity) : null;
   }
 
-  async findActiveByVoyageId(voyageId: number): Promise<AffectationVoyage | null> {
+  async findActiveByVoyageId(
+    voyageId: number,
+  ): Promise<AffectationVoyage | null> {
     const entity = await this.repository.findOne({
       where: {
         voyageId,

@@ -78,8 +78,7 @@ export class SendMessageUseCase {
     await this.conversationRepository.update(request.conversationId, {
       dernierMessage: request.content.substring(0, 100),
       dernierMessageDate: savedMessage.dateEnvoi,
-      updatedAt: new Date(),
-    } as any);
+    });
 
     return {
       id: savedMessage.id!,

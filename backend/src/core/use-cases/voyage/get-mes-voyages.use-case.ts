@@ -14,7 +14,8 @@ export class GetMesVoyagesUseCase {
   ) {}
 
   async execute(gpCreateurId: number) {
-    const voyages = await this.voyageRepository.findByGpCreateurId(gpCreateurId);
+    const voyages =
+      await this.voyageRepository.findByGpCreateurId(gpCreateurId);
 
     return voyages.map((voyage) => ({
       id: voyage.id,

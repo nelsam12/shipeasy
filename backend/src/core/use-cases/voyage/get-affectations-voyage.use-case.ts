@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import type { IAffectationVoyageRepository } from '../../ports/repositories/affectation-voyage.repository';
 import { AFFECTATION_VOYAGE_REPOSITORY } from '../../ports/repositories/affectation-voyage.repository';
 
@@ -14,7 +14,8 @@ export class GetAffectationsVoyageUseCase {
   ) {}
 
   async execute(voyageId: number) {
-    const affectations = await this.affectationRepository.findByVoyageId(voyageId);
+    const affectations =
+      await this.affectationRepository.findByVoyageId(voyageId);
 
     return affectations.map((affectation) => ({
       id: affectation.id,

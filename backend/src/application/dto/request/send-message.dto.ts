@@ -1,5 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, IsArray, IsOptional, ValidateNested } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsArray,
+  IsOptional,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 class PieceJointeDto {
@@ -27,7 +34,10 @@ export class SendMessageDto {
   @IsNotEmpty()
   content: string;
 
-  @ApiPropertyOptional({ description: 'Attached files', type: [PieceJointeDto] })
+  @ApiPropertyOptional({
+    description: 'Attached files',
+    type: [PieceJointeDto],
+  })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })

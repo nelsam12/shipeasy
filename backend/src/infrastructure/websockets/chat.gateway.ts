@@ -20,6 +20,12 @@ interface JwtPayload {
   role: string;
 }
 
+interface SocketData {
+  userId?: number;
+}
+
+type AuthenticatedSocket = Socket & { data: SocketData };
+
 interface SendMessagePayload {
   conversationId: number;
   content: string;
@@ -58,7 +64,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     private readonly markMessagesReadUseCase: MarkMessagesReadUseCase,
   ) {}
 
-  async handleConnection(client: Socket) {
+  async handleConnection(client: AuthenticatedSocket) {
     try {
       const token = this.extractToken(client);
       const user = await this.validateToken(token);
@@ -77,7 +83,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
-  handleDisconnect(client: Socket) {
+  handleDisconnect(client: AuthenticatedSocket) {
     const userId = client.data.userId;
     if (userId) {
       this.connectedUsers.delete(userId);
@@ -87,33 +93,36 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('join-conversation')
   handleJoinConversation(
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: AuthenticatedSocket,
     @MessageBody() data: { conversationId: number },
   ) {
     const room = `conversation-${data.conversationId}`;
-    client.join(room);
-    this.logger.log(`User ${client.data.userId} joined ${room}`);
+    void client.join(room);
+    this.logger.log(`User ${client.data.userId ?? 'unknown'} joined ${room}`);
     return { success: true };
   }
 
   @SubscribeMessage('leave-conversation')
   handleLeaveConversation(
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: AuthenticatedSocket,
     @MessageBody() data: { conversationId: number },
   ) {
     const room = `conversation-${data.conversationId}`;
-    client.leave(room);
-    this.logger.log(`User ${client.data.userId} left ${room}`);
+    void client.leave(room);
+    this.logger.log(`User ${client.data.userId ?? 'unknown'} left ${room}`);
     return { success: true };
   }
 
   @SubscribeMessage('send-message')
   async handleSendMessage(
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: AuthenticatedSocket,
     @MessageBody() data: SendMessagePayload,
   ) {
     try {
       const userId = client.data.userId;
+      if (!userId) {
+        return { success: false, error: 'User not authenticated' };
+      }
 
       const message = await this.sendMessageUseCase.execute({
         conversationId: data.conversationId,
@@ -130,18 +139,23 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
       return { success: true, message };
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
       this.logger.error('Error sending message:', error);
-      return { success: false, error: error.message };
+      return { success: false, error: errorMessage };
     }
   }
 
   @SubscribeMessage('mark-read')
   async handleMarkRead(
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: AuthenticatedSocket,
     @MessageBody() data: MarkReadPayload,
   ) {
     try {
       const userId = client.data.userId;
+      if (!userId) {
+        return { success: false, error: 'User not authenticated' };
+      }
 
       await this.markMessagesReadUseCase.execute(data.conversationId, userId);
 
@@ -154,14 +168,16 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
       return { success: true };
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
       this.logger.error('Error marking messages as read:', error);
-      return { success: false, error: error.message };
+      return { success: false, error: errorMessage };
     }
   }
 
   @SubscribeMessage('typing')
   handleTyping(
-    @ConnectedSocket() client: Socket,
+    @ConnectedSocket() client: AuthenticatedSocket,
     @MessageBody() data: TypingPayload,
   ) {
     const userId = client.data.userId;

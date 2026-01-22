@@ -44,11 +44,15 @@ export class TypeOrmConversationRepository implements IConversationRepository {
     return this.toDomain(saved);
   }
 
-  async update(
-    id: number,
-    data: Partial<Conversation>,
-  ): Promise<Conversation> {
-    await this.repository.update(id, data as any);
+  async update(id: number, data: Partial<Conversation>): Promise<Conversation> {
+    const updateData: Partial<ConversationOrmEntity> = {};
+    if (data.dernierMessage !== undefined) {
+      updateData.dernierMessage = data.dernierMessage;
+    }
+    if (data.dernierMessageDate !== undefined) {
+      updateData.dernierMessageDate = data.dernierMessageDate;
+    }
+    await this.repository.update(id, updateData);
     const updated = await this.repository.findOne({ where: { id } });
     if (!updated) {
       throw new Error('Conversation not found after update');
