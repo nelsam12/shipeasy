@@ -11,9 +11,9 @@ export interface Reservation {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
   statut: StatutReservation;
@@ -25,9 +25,9 @@ export interface Reservation {
 export interface CreerReservationDto {
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
 }

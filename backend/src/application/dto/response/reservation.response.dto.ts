@@ -20,20 +20,23 @@ export class ReservationResponseDto {
   @ApiProperty({
     description: 'Description du colis',
     example: 'Vêtements et livres',
+    required: false,
   })
-  description: string;
+  description?: string;
 
   @ApiProperty({
     description: "Adresse d'enlèvement",
     example: '123 Rue de la République, Dakar, Sénégal',
+    required: false,
   })
-  adresseEnlevement: string;
+  adresseEnlevement?: string;
 
   @ApiProperty({
     description: 'Adresse de livraison',
     example: '456 Avenue des Champs-Élysées, Paris, France',
+    required: false,
   })
-  adresseLivraison: string;
+  adresseLivraison?: string;
 
   @ApiProperty({
     description: 'Nom du destinataire',

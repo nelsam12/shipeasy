@@ -10,9 +10,9 @@ export class Reservation {
     public readonly clientId: number,
     public readonly voyageId: number,
     public readonly poidsKg: number,
-    public readonly description: string,
-    public readonly adresseEnlevement: string,
-    public readonly adresseLivraison: string,
+    public readonly description: string | undefined,
+    public readonly adresseEnlevement: string | undefined,
+    public readonly adresseLivraison: string | undefined,
     public readonly nomDestinataire: string,
     public readonly telephoneDestinataire: string,
     public readonly statut: StatutReservation = StatutReservation.EN_ATTENTE,
@@ -33,18 +33,6 @@ export class Reservation {
 
     if (this.poidsKg > 1000) {
       throw new Error('Le poids ne peut pas dépasser 1000 kg');
-    }
-
-    if (!this.description || this.description.trim().length === 0) {
-      throw new Error('La description du colis est obligatoire');
-    }
-
-    if (!this.adresseEnlevement || this.adresseEnlevement.trim().length === 0) {
-      throw new Error("L'adresse d'enlèvement est obligatoire");
-    }
-
-    if (!this.adresseLivraison || this.adresseLivraison.trim().length === 0) {
-      throw new Error("L'adresse de livraison est obligatoire");
     }
 
     if (!this.nomDestinataire || this.nomDestinataire.trim().length === 0) {

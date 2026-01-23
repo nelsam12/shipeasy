@@ -19,9 +19,9 @@ export interface CreerReservationCommand {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
 }
@@ -31,9 +31,9 @@ export interface CreerReservationResponse {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
   statut: StatutReservation;
