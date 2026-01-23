@@ -13,6 +13,7 @@ import type { IUserRepository } from '../../ports/repositories';
 import { USER_REPOSITORY } from '../../ports/repositories';
 import { Reservation } from '../../domain/entities/reservation.entity';
 import { Role } from '../../domain/enums/role.enum';
+import { StatutReservation } from '../../domain/enums/statut-reservation.enum';
 
 export interface CreerReservationCommand {
   clientId: number;
@@ -35,9 +36,10 @@ export interface CreerReservationResponse {
   adresseLivraison: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
-  statut: string;
+  statut: StatutReservation;
   montantTotal?: number;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 /**
@@ -131,6 +133,7 @@ export class CreerReservationUseCase {
       statut: savedReservation.statut,
       montantTotal: savedReservation.montantTotal,
       createdAt: savedReservation.createdAt!,
+      updatedAt: savedReservation.updatedAt!,
     };
   }
 }

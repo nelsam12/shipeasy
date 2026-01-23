@@ -6,3 +6,4 @@ export * from "./nav.types";
 export * from "./trip.types";
 export * from "./voyage.types";
 export * from "./gp.type";
+export * from "./reservation.types";
