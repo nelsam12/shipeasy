@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getVoyageById } from "@/services/voyages.service";
+import { chatService } from "@/services/chat.service";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,11 +20,13 @@ import {
   Calendar,
   DollarSign,
   Loader2,
+  MessageSquare,
   Package,
   User,
 } from "lucide-react";
 import type { Voyage, StatutVoyage } from "@/types";
 import { Role } from "@/types";
+import { toast } from "sonner";
 
 const STATUT_COLORS: Record<
   StatutVoyage,
@@ -109,6 +112,22 @@ export default function VoyageDetailPage() {
 
   function handleReserver() {
     router.push(`/dashboard/client/colis/nouveau?voyageId=${voyage.id}`);
+  }
+
+  async function handleContactGP() {
+    if (!user || !voyage.gpCourantId) return;
+    
+    try {
+      const conversation = await chatService.createConversation({
+        clientId: user.id,
+        gpId: voyage.gpCourantId,
+      });
+      router.push(`/dashboard/messages?conversation=${conversation.id}`);
+      toast.success("Conversation ouverte !");
+    } catch (error) {
+      console.error("Error creating conversation:", error);
+      toast.error("Erreur lors de l'ouverture de la conversation");
+    }
   }
 
   return (
@@ -201,6 +220,18 @@ export default function VoyageDetailPage() {
           {canReserve && (
             <Button className="w-full" size="lg" onClick={handleReserver}>
               Réserver ce voyage
+            </Button>
+          )}
+
+          {/* Bouton pour contacter le GP */}
+          {user?.role === Role.CLIENT && voyage.gpCourantId && (
+            <Button
+              variant="outline"
+              onClick={handleContactGP}
+              className="w-full"
+            >
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Contacter le GP
             </Button>
           )}
 

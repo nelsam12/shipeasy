@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useConversations } from "@/lib/useConversations";
 import { useMessages } from "@/lib/useMessages";
 import { useSendMessage } from "@/lib/useSendMessage";
@@ -18,6 +19,7 @@ import { chatService } from "@/services/chat.service";
 
 export default function MessagesPage() {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
   const [selectedConversationId, setSelectedConversationId] = useState<number | null>(null);
   const [showMobileList, setShowMobileList] = useState(true);
 
@@ -35,6 +37,15 @@ export default function MessagesPage() {
 
   // Send message mutation
   const sendMessageMutation = useSendMessage();
+
+  // Handle conversation from URL parameter
+  useEffect(() => {
+    const conversationIdFromUrl = searchParams.get('conversation');
+    if (conversationIdFromUrl) {
+      setSelectedConversationId(Number(conversationIdFromUrl));
+      setShowMobileList(false);
+    }
+  }, [searchParams]);
 
   // Mark messages as read when conversation is selected
   useEffect(() => {
