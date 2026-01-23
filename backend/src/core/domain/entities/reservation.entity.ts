@@ -44,7 +44,7 @@ export class Reservation {
     }
 
     if (!this.adresseLivraison || this.adresseLivraison.trim().length === 0) {
-      throw new Error('L\'adresse de livraison est obligatoire');
+      throw new Error("L'adresse de livraison est obligatoire");
     }
 
     if (!this.nomDestinataire || this.nomDestinataire.trim().length === 0) {

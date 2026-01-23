@@ -49,8 +49,8 @@ export class TypeOrmReservationRepository implements IReservationRepository {
   async calculerPoidsReservePourVoyage(voyageId: number): Promise<number> {
     const result = await this.repository
       .createQueryBuilder('reservation')
-      .select('SUM(reservation.poids_kg)', 'total')
-      .where('reservation.voyage_id = :voyageId', { voyageId })
+      .select('SUM(reservation.poidsKg)', 'total')
+      .where('reservation.voyageId = :voyageId', { voyageId })
       .andWhere('reservation.statut IN (:...statuts)', {
         statuts: [
           StatutReservation.EN_ATTENTE,
