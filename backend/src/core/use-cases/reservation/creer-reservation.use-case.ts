@@ -116,8 +116,7 @@ export class CreerReservationUseCase {
     );
 
     // Sauvegarder la réservation
-    const savedReservation =
-      await this.reservationRepository.save(reservation);
+    const savedReservation = await this.reservationRepository.save(reservation);
 
     // Retourner la réponse
     return {

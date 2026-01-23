@@ -67,9 +67,8 @@ export class AnnulerReservationUseCase {
     const reservationAnnulee = reservation.annuler();
 
     // Sauvegarder la réservation annulée
-    const savedReservation = await this.reservationRepository.save(
-      reservationAnnulee,
-    );
+    const savedReservation =
+      await this.reservationRepository.save(reservationAnnulee);
 
     // Retourner la réponse
     return {

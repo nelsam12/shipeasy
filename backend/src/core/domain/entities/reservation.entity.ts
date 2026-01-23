@@ -39,7 +39,10 @@ export class Reservation {
       throw new Error('Le nom du destinataire est obligatoire');
     }
 
-    if (!this.telephoneDestinataire || this.telephoneDestinataire.trim().length === 0) {
+    if (
+      !this.telephoneDestinataire ||
+      this.telephoneDestinataire.trim().length === 0
+    ) {
       throw new Error('Le téléphone du destinataire est obligatoire');
     }
 
@@ -90,7 +93,9 @@ export class Reservation {
    */
   confirmer(): Reservation {
     if (this.statut !== StatutReservation.EN_ATTENTE) {
-      throw new Error('Seules les réservations en attente peuvent être confirmées');
+      throw new Error(
+        'Seules les réservations en attente peuvent être confirmées',
+      );
     }
 
     return new Reservation(

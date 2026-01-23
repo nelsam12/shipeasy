@@ -138,7 +138,7 @@ export function FormulaireReservation({
       <div className="space-y-3">
         <div className="space-y-1.5">
           <Label htmlFor="adresseEnlevement" className="text-sm">
-            Adresse d'enlèvement <span className="text-muted-foreground">(optionnel)</span>
+            Adresse d&apos;enlèvement <span className="text-muted-foreground">(optionnel)</span>
           </Label>
           <Textarea
             id="adresseEnlevement"

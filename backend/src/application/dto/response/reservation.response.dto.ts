@@ -64,7 +64,10 @@ export class ReservationResponseDto {
   })
   montantTotal?: number;
 
-  @ApiProperty({ description: 'Date de création', example: '2026-01-23T10:00:00Z' })
+  @ApiProperty({
+    description: 'Date de création',
+    example: '2026-01-23T10:00:00Z',
+  })
   createdAt: Date;
 
   @ApiProperty({
