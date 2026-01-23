@@ -63,7 +63,7 @@ export function VoyageCard({ voyage, onClick, showContactButton, onContactGP }: 
                 size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onContactGP?.(voyage.gpCourantId!);
+                  onContactGP?.(voyage.gpCourantId as number);
                 }}
               >
                 <MessageSquare className="h-4 w-4" />

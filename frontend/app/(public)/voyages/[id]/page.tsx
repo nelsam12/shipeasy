@@ -126,7 +126,7 @@ export default function VoyageDetailPage() {
       toast.success("Conversation ouverte !");
     } catch (error) {
       console.error("Error creating conversation:", error);
-      toast.error("Erreur lors de l'ouverture de la conversation");
+      toast.error("Impossible de créer la conversation avec le GP");
     }
   }
 
