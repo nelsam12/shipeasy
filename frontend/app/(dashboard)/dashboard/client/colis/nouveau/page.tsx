@@ -23,14 +23,15 @@ export default function NouveauColisPage() {
   // Pré-sélectionner le voyage si voyageId est dans l'URL
   useEffect(() => {
     const voyageIdParam = searchParams.get('voyageId');
-    if (voyageIdParam && voyages.length > 0 && !selectedVoyage) {
+    if (voyageIdParam && voyages.length > 0) {
       const preselectedVoyage = voyages.find(v => v.id === parseInt(voyageIdParam, 10));
-      if (preselectedVoyage) {
+      if (preselectedVoyage && !selectedVoyage) {
         setSelectedVoyage(preselectedVoyage);
         setIsDialogOpen(true);
       }
     }
-  }, [searchParams, voyages, selectedVoyage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, voyages]);
 
   function handleSelectVoyage(voyage: Voyage) {
     setSelectedVoyage(voyage);
