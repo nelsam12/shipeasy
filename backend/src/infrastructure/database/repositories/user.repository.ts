@@ -102,6 +102,9 @@ export class TypeOrmUserRepository implements IUserRepository {
     if (data.description !== undefined) {
       user.description = data.description;
     }
+    if (data.isApproved !== undefined) {
+      user.isApproved = data.isApproved;
+    }
 
     const updated = await this.repository.save(user);
     return this.toDomain(updated);

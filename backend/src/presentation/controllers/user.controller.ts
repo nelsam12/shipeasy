@@ -1,22 +1,28 @@
 import {
   Controller,
   Get,
-  Query,
+  Patch,
+  Param,
+  ParseIntPipe,
   UseGuards,
-  ParseBoolPipe,
+  Query,
 } from '@nestjs/common';
 import {
-  ApiTags,
-  ApiOperation,
   ApiBearerAuth,
+  ApiOperation,
   ApiResponse,
+  ApiTags,
   ApiQuery,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../infrastructure/security/guards/jwt-auth.guard';
 import { RolesGuard } from '../../infrastructure/security/guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../../core/domain/enums/role.enum';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import type { JwtUser } from '../../shared/types/request-with-user';
 import { ListGPsUseCase } from '../../core/use-cases/user/list-gps.use-case';
+import { ApproveGPUseCase } from '../../core/use-cases/user/approve-gp.use-case';
+import { RejectGPUseCase } from '../../core/use-cases/user/reject-gp.use-case';
 
 /**
  * User Controller
@@ -25,7 +31,11 @@ import { ListGPsUseCase } from '../../core/use-cases/user/list-gps.use-case';
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
-  constructor(private readonly listGPsUseCase: ListGPsUseCase) {}
+  constructor(
+    private readonly listGPsUseCase: ListGPsUseCase,
+    private readonly approveGPUseCase: ApproveGPUseCase,
+    private readonly rejectGPUseCase: RejectGPUseCase,
+  ) {}
 
   @ApiBearerAuth('access-token')
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -52,5 +62,46 @@ export class UserController {
     const isApprovedBool =
       isApproved !== undefined ? isApproved === 'true' : undefined;
     return this.listGPsUseCase.execute({ search, isApproved: isApprovedBool });
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.GESTIONNAIRE, Role.ADMIN)
+  @Patch('gps/:id/approve')
+  @ApiOperation({ summary: 'Approve a GP (GESTIONNAIRE/ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'GP approved successfully' })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid request or GP already approved',
+  })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  @ApiResponse({ status: 404, description: 'GP not found' })
+  async approveGP(
+    @Param('id', ParseIntPipe) gpId: number,
+    @CurrentUser() user: JwtUser,
+  ) {
+    return this.approveGPUseCase.execute({
+      gpId,
+      approvedBy: user.userId,
+    });
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.GESTIONNAIRE, Role.ADMIN)
+  @Patch('gps/:id/reject')
+  @ApiOperation({ summary: 'Reject a GP (GESTIONNAIRE/ADMIN only)' })
+  @ApiResponse({ status: 200, description: 'GP rejected successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid request' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  @ApiResponse({ status: 404, description: 'GP not found' })
+  async rejectGP(
+    @Param('id', ParseIntPipe) gpId: number,
+    @CurrentUser() user: JwtUser,
+  ) {
+    return this.rejectGPUseCase.execute({
+      gpId,
+      rejectedBy: user.userId,
+    });
   }
 }

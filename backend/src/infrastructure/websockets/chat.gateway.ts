@@ -211,7 +211,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     if (cookies) {
       const accessTokenMatch = cookies.match(/access_token=([^;]+)/);
       if (accessTokenMatch) return accessTokenMatch[1];
-      
+
       const altTokenMatch = cookies.match(/accessToken=([^;]+)/);
       if (altTokenMatch) return altTokenMatch[1];
     }
