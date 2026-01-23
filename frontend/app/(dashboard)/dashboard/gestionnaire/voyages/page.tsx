@@ -48,7 +48,7 @@ const STATUT_LABELS: Record<StatutVoyage, string> = {
 
 export default function GestionnaireVoyagesPage() {
   const { voyages, isLoading, error, refetch } = useVoyages();
-  const { gps, isLoading: isLoadingGPs } = useGPs();
+  const { gps, isLoading: isLoadingGPs } = useGPs({ isApproved: true });
   const { affecter, isLoading: isAffecting } = useAffecterVoyage();
   const { changeStatut, isLoading: isChangingStatut } = useChangeStatutVoyage();
 
@@ -129,8 +129,6 @@ export default function GestionnaireVoyagesPage() {
       </div>
     );
   }
-
-  const approvedGps = gps.filter((gp) => gp.isApproved);
 
   return (
     <div className="space-y-6">
@@ -316,7 +314,7 @@ export default function GestionnaireVoyagesPage() {
                     <Loader2 className="h-4 w-4 animate-spin" />
                     Chargement des GPs...
                   </div>
-                ) : approvedGps.length === 0 ? (
+                ) : gps.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
                     Aucun GP approuve disponible
                   </p>
@@ -326,7 +324,7 @@ export default function GestionnaireVoyagesPage() {
                       <SelectValue placeholder="Selectionner un GP" />
                     </SelectTrigger>
                     <SelectContent>
-                      {approvedGps.map((gp) => (
+                      {gps.map((gp) => (
                         <SelectItem key={gp.id} value={gp.id.toString()}>
                           {gp.fullName} ({gp.email})
                         </SelectItem>

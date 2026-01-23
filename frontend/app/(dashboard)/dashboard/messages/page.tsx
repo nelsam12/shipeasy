@@ -25,7 +25,10 @@ export default function MessagesPage() {
   useSocket();
 
   // Fetch conversations
-  const { data: conversations, isLoading: loadingConversations } = useConversations();
+  const { data: conversationsData, isLoading: loadingConversations } = useConversations();
+  
+  // Ensure conversations is always an array
+  const conversations = Array.isArray(conversationsData) ? conversationsData : [];
 
   // Fetch messages for selected conversation
   const { data: messages, isLoading: loadingMessages } = useMessages(selectedConversationId);
@@ -93,7 +96,7 @@ export default function MessagesPage() {
                 </div>
               ) : (
                 <ConversationList
-                  conversations={conversations || []}
+                  conversations={conversations}
                   selectedId={selectedConversationId || undefined}
                   onSelect={handleSelectConversation}
                   currentUserId={user.id}

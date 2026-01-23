@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getGPs } from "@/services/gp.service";
 import { GetGPsQuery, GP } from "@/types/gp.type";
 
-export function useGPs() {
+export function useGPs(initialQuery?: GetGPsQuery) {
     const [gps, setGps] = useState<GP[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export function useGPs() {
     }
 
     useEffect(() => {
-        fetchGPs();
+        fetchGPs(initialQuery);
     }, []);
 
     return {
