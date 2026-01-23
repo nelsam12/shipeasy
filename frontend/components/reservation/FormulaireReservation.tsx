@@ -71,9 +71,9 @@ export function FormulaireReservation({
       const data: CreerReservationDto = {
         voyageId,
         poidsKg: Number(poidsKg),
-        description: description.trim() || undefined,
-        adresseEnlevement: adresseEnlevement.trim() || undefined,
-        adresseLivraison: adresseLivraison.trim() || undefined,
+        description: description?.trim() || undefined,
+        adresseEnlevement: adresseEnlevement?.trim() || undefined,
+        adresseLivraison: adresseLivraison?.trim() || undefined,
         nomDestinataire,
         telephoneDestinataire,
       };
