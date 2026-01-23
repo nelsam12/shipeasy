@@ -24,6 +24,7 @@ export function useGPs(initialQuery?: GetGPsQuery) {
 
     useEffect(() => {
         fetchGPs(initialQuery);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return {
