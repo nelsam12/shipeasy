@@ -9,6 +9,7 @@ import { VoyageOrmEntity } from './entities/voyage.orm-entity';
 import { AffectationVoyageOrmEntity } from './entities/affectation-voyage.orm-entity';
 import { ConversationOrmEntity } from './entities/conversation.orm-entity';
 import { MessageOrmEntity } from './entities/message.orm-entity';
+import { ReservationOrmEntity } from './entities/reservation.orm-entity';
 
 /**
  * Database Module
@@ -33,6 +34,7 @@ import { MessageOrmEntity } from './entities/message.orm-entity';
           AffectationVoyageOrmEntity,
           ConversationOrmEntity,
           MessageOrmEntity,
+          ReservationOrmEntity,
         ],
         synchronize: true, // Should be false in production
       }),
@@ -44,6 +46,7 @@ import { MessageOrmEntity } from './entities/message.orm-entity';
       AffectationVoyageOrmEntity,
       ConversationOrmEntity,
       MessageOrmEntity,
+      ReservationOrmEntity,
     ]),
   ],
   providers: [

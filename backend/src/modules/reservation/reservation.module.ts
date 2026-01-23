@@ -8,13 +8,18 @@ import { RESERVATION_REPOSITORY } from '../../core/ports/repositories/reservatio
 import { CreerReservationUseCase } from '../../core/use-cases/reservation/creer-reservation.use-case';
 import { ListerMesReservationsUseCase } from '../../core/use-cases/reservation/lister-mes-reservations.use-case';
 import { AnnulerReservationUseCase } from '../../core/use-cases/reservation/annuler-reservation.use-case';
+import { VoyageModule } from '../voyage/voyage.module';
 
 /**
  * Module de gestion des réservations
  * Fournit les fonctionnalités de réservation de colis
  */
 @Module({
-  imports: [TypeOrmModule.forFeature([ReservationOrmEntity]), DatabaseModule],
+  imports: [
+    TypeOrmModule.forFeature([ReservationOrmEntity]),
+    DatabaseModule,
+    VoyageModule,
+  ],
   controllers: [ReservationController],
   providers: [
     // Repository
