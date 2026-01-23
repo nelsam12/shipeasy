@@ -55,7 +55,13 @@ export default function VoyageDetailPage() {
   useEffect(() => {
     async function fetchVoyage() {
       try {
-        const response = await getVoyageById(Number(params.id));
+        const id = Number(params.id);
+        if (isNaN(id) || id <= 0) {
+          setError("ID de voyage invalide");
+          setIsLoading(false);
+          return;
+        }
+        const response = await getVoyageById(id);
         setVoyage(response.data);
       } catch {
         setError("Voyage introuvable");
@@ -102,7 +108,7 @@ export default function VoyageDetailPage() {
     voyage.availableKilos > 0;
 
   function handleReserver() {
-    router.push("/dashboard/client/colis/nouveau");
+    router.push(`/dashboard/client/colis/nouveau?voyageId=${voyage.id}`);
   }
 
   return (

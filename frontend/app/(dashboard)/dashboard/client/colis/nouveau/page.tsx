@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RoleGuard } from "@/components/guards/RoleGuard";
 import { Role } from "@/types";
 import { useVoyages } from "@/hooks/useVoyages";
@@ -11,13 +11,26 @@ import { VoyageCard } from "@/components/voyage/VoyageCard";
 import { FormulaireReservation } from "@/components/reservation/FormulaireReservation";
 import { Loader2, PackageX } from "lucide-react";
 import type { Voyage } from "@/types";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function NouveauColisPage() {
   const { voyages, isLoading, error } = useVoyages();
   const [selectedVoyage, setSelectedVoyage] = useState<Voyage | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Pré-sélectionner le voyage si voyageId est dans l'URL
+  useEffect(() => {
+    const voyageIdParam = searchParams.get('voyageId');
+    if (voyageIdParam && voyages.length > 0 && !selectedVoyage) {
+      const preselectedVoyage = voyages.find(v => v.id === parseInt(voyageIdParam, 10));
+      if (preselectedVoyage) {
+        setSelectedVoyage(preselectedVoyage);
+        setIsDialogOpen(true);
+      }
+    }
+  }, [searchParams, voyages, selectedVoyage]);
 
   function handleSelectVoyage(voyage: Voyage) {
     setSelectedVoyage(voyage);
