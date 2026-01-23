@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useGPs } from "@/hooks/useGPs";
+import { useApproveGP } from "@/hooks/useApproveGP";
+import { useRejectGP } from "@/hooks/useRejectGP";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,13 +16,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
 
 export default function GestionnaireApprobationsPage() {
   const { gps, isLoading, error, refetch } = useGPs({ isApproved: false });
+  const { approve, isLoading: isApproving } = useApproveGP();
+  const { reject, isLoading: isRejecting } = useRejectGP();
+  
   const [selectedGP, setSelectedGP] = useState<number | null>(null);
-  const [isApproving, setIsApproving] = useState(false);
-  const [isRejecting, setIsRejecting] = useState(false);
   const [showApproveDialog, setShowApproveDialog] = useState(false);
   const [showRejectDialog, setShowRejectDialog] = useState(false);
 
@@ -29,42 +31,20 @@ export default function GestionnaireApprobationsPage() {
   async function handleApprove() {
     if (!selectedGP) return;
 
-    setIsApproving(true);
-    try {
-      // TODO: Implémenter l'endpoint backend pour approuver un GP
-      // await approveGP(selectedGP);
-      
-      // Simulate API call for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      toast.success("GP approuvé avec succès");
+    const success = await approve(selectedGP);
+    if (success) {
       setShowApproveDialog(false);
-      refetch();
-    } catch (error) {
-      toast.error("Erreur lors de l'approbation du GP");
-    } finally {
-      setIsApproving(false);
+      refetch({ isApproved: false }); // Rafraîchir la liste
     }
   }
 
   async function handleReject() {
     if (!selectedGP) return;
 
-    setIsRejecting(true);
-    try {
-      // TODO: Implémenter l'endpoint backend pour rejeter un GP
-      // await rejectGP(selectedGP);
-      
-      // Simulate API call for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      toast.success("GP rejeté avec succès");
+    const success = await reject(selectedGP);
+    if (success) {
       setShowRejectDialog(false);
-      refetch();
-    } catch (error) {
-      toast.error("Erreur lors du rejet du GP");
-    } finally {
-      setIsRejecting(false);
+      refetch({ isApproved: false }); // Rafraîchir la liste
     }
   }
 
