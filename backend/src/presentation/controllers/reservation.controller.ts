@@ -45,7 +45,9 @@ export class ReservationController {
   @Roles(Role.CLIENT)
   @Post()
   @HttpCode(201)
-  @ApiOperation({ summary: 'Créer une nouvelle réservation (CLIENT uniquement)' })
+  @ApiOperation({
+    summary: 'Créer une nouvelle réservation (CLIENT uniquement)',
+  })
   @ApiResponse({
     status: 201,
     description: 'Réservation créée avec succès',

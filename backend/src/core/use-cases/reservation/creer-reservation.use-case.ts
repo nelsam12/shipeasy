@@ -19,9 +19,9 @@ export interface CreerReservationCommand {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
 }
@@ -31,9 +31,9 @@ export interface CreerReservationResponse {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
   statut: StatutReservation;
@@ -116,8 +116,7 @@ export class CreerReservationUseCase {
     );
 
     // Sauvegarder la réservation
-    const savedReservation =
-      await this.reservationRepository.save(reservation);
+    const savedReservation = await this.reservationRepository.save(reservation);
 
     // Retourner la réponse
     return {
