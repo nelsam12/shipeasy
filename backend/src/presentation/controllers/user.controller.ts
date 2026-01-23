@@ -1,5 +1,19 @@
-import { Controller, Get, Patch, Param, ParseIntPipe, UseGuards, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags, ApiQuery } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Patch,
+  Param,
+  ParseIntPipe,
+  UseGuards,
+  Query,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../infrastructure/security/guards/jwt-auth.guard';
 import { RolesGuard } from '../../infrastructure/security/guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
@@ -56,7 +70,10 @@ export class UserController {
   @Patch('gps/:id/approve')
   @ApiOperation({ summary: 'Approve a GP (GESTIONNAIRE/ADMIN only)' })
   @ApiResponse({ status: 200, description: 'GP approved successfully' })
-  @ApiResponse({ status: 400, description: 'Invalid request or GP already approved' })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid request or GP already approved',
+  })
   @ApiResponse({ status: 403, description: 'Insufficient permissions' })
   @ApiResponse({ status: 404, description: 'GP not found' })
   async approveGP(

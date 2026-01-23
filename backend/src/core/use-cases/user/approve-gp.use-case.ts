@@ -1,5 +1,13 @@
-import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { IUserRepository, USER_REPOSITORY } from '../../ports/repositories/user.repository';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
+import {
+  IUserRepository,
+  USER_REPOSITORY,
+} from '../../ports/repositories/user.repository';
 import { Role } from '../../domain/enums/role.enum';
 
 export interface ApproveGPCommand {
@@ -29,7 +37,7 @@ export class ApproveGPUseCase {
   async execute(command: ApproveGPCommand): Promise<ApproveGPResponse> {
     // Find the GP user
     const gp = await this.userRepository.findById(command.gpId);
-    
+
     if (!gp) {
       throw new NotFoundException('GP not found');
     }
