@@ -21,6 +21,7 @@ import { Role } from '../../core/domain/enums/role.enum';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import type { JwtUser } from '../../shared/types/request-with-user';
 import { ListGPsUseCase } from '../../core/use-cases/user/list-gps.use-case';
+import { ListClientsUseCase } from '../../core/use-cases/user/list-clients.use-case';
 import { ApproveGPUseCase } from '../../core/use-cases/user/approve-gp.use-case';
 import { RejectGPUseCase } from '../../core/use-cases/user/reject-gp.use-case';
 
@@ -33,6 +34,7 @@ import { RejectGPUseCase } from '../../core/use-cases/user/reject-gp.use-case';
 export class UserController {
   constructor(
     private readonly listGPsUseCase: ListGPsUseCase,
+    private readonly listClientsUseCase: ListClientsUseCase,
     private readonly approveGPUseCase: ApproveGPUseCase,
     private readonly rejectGPUseCase: RejectGPUseCase,
   ) {}
@@ -62,6 +64,18 @@ export class UserController {
     const isApprovedBool =
       isApproved !== undefined ? isApproved === 'true' : undefined;
     return this.listGPsUseCase.execute({ search, isApproved: isApprovedBool });
+  }
+
+  @ApiBearerAuth('access-token')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.GESTIONNAIRE, Role.ADMIN)
+  @Get('clients')
+  @ApiOperation({ summary: 'List all clients (GESTIONNAIRE/ADMIN only)' })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiResponse({ status: 200, description: 'List of clients' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  async listClients(@Query('search') search?: string) {
+    return this.listClientsUseCase.execute({ search });
   }
 
   @ApiBearerAuth('access-token')
