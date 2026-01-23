@@ -143,6 +143,7 @@ export default function NouveauColisPage() {
                 {/* Formulaire de réservation */}
                 <FormulaireReservation
                   voyageId={selectedVoyage.id}
+                  capaciteDisponible={selectedVoyage.availableKilos}
                   onSuccess={handleSuccess}
                 />
               </div>

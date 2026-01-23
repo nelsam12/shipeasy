@@ -6,6 +6,7 @@ import {
   IsPositive,
   Min,
   Max,
+  IsOptional,
 } from 'class-validator';
 
 /**
@@ -36,26 +37,29 @@ export class CreerReservationDto {
   @ApiProperty({
     description: 'Description du contenu du colis',
     example: 'Vêtements et livres',
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
-  description: string;
+  @IsOptional()
+  description?: string;
 
   @ApiProperty({
     description: "Adresse d'enlèvement du colis",
     example: '123 Rue de la République, Dakar, Sénégal',
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
-  adresseEnlevement: string;
+  @IsOptional()
+  adresseEnlevement?: string;
 
   @ApiProperty({
     description: 'Adresse de livraison du colis',
     example: '456 Avenue des Champs-Élysées, Paris, France',
+    required: false,
   })
   @IsString()
-  @IsNotEmpty()
-  adresseLivraison: string;
+  @IsOptional()
+  adresseLivraison?: string;
 
   @ApiProperty({
     description: 'Nom complet du destinataire',

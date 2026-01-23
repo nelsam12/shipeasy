@@ -11,9 +11,9 @@ export interface ReservationDto {
   clientId: number;
   voyageId: number;
   poidsKg: number;
-  description: string;
-  adresseEnlevement: string;
-  adresseLivraison: string;
+  description?: string;
+  adresseEnlevement?: string;
+  adresseLivraison?: string;
   nomDestinataire: string;
   telephoneDestinataire: string;
   statut: StatutReservation;

@@ -14,11 +14,13 @@ import { Loader2 } from "lucide-react";
 
 interface FormulaireReservationProps {
   voyageId: number;
+  capaciteDisponible: number;
   onSuccess?: () => void;
 }
 
 export function FormulaireReservation({
   voyageId,
+  capaciteDisponible,
   onSuccess,
 }: FormulaireReservationProps) {
   const router = useRouter();
@@ -38,20 +40,10 @@ export function FormulaireReservation({
 
     if (!poidsKg || Number(poidsKg) <= 0) {
       newErrors.poidsKg = "Le poids doit être supérieur à 0 kg";
+    } else if (Number(poidsKg) > capaciteDisponible) {
+      newErrors.poidsKg = `Le poids ne peut pas dépasser la capacité disponible (${capaciteDisponible} kg)`;
     } else if (Number(poidsKg) > 1000) {
       newErrors.poidsKg = "Le poids ne peut pas dépasser 1000 kg";
-    }
-
-    if (!description || description.trim().length === 0) {
-      newErrors.description = "La description est obligatoire";
-    }
-
-    if (!adresseEnlevement || adresseEnlevement.trim().length === 0) {
-      newErrors.adresseEnlevement = "L'adresse d'enlèvement est obligatoire";
-    }
-
-    if (!adresseLivraison || adresseLivraison.trim().length === 0) {
-      newErrors.adresseLivraison = "L'adresse de livraison est obligatoire";
     }
 
     if (!nomDestinataire || nomDestinataire.trim().length === 0) {
@@ -79,9 +71,9 @@ export function FormulaireReservation({
       const data: CreerReservationDto = {
         voyageId,
         poidsKg: Number(poidsKg),
-        description,
-        adresseEnlevement,
-        adresseLivraison,
+        description: description?.trim() || undefined,
+        adresseEnlevement: adresseEnlevement?.trim() || undefined,
+        adresseLivraison: adresseLivraison?.trim() || undefined,
         nomDestinataire,
         telephoneDestinataire,
       };
@@ -112,7 +104,7 @@ export function FormulaireReservation({
           id="poidsKg"
           type="number"
           min="0.1"
-          max="1000"
+          max={capaciteDisponible}
           step="0.1"
           placeholder="15.5"
           value={poidsKg}
@@ -122,12 +114,15 @@ export function FormulaireReservation({
         {errors.poidsKg && (
           <p className="text-xs text-red-500">{errors.poidsKg}</p>
         )}
+        <p className="text-xs text-muted-foreground">
+          Capacité disponible : {capaciteDisponible} kg
+        </p>
       </div>
 
       {/* Description du colis */}
       <div className="space-y-1.5">
         <Label htmlFor="description" className="text-sm">
-          Description du colis <span className="text-red-500">*</span>
+          Description du colis <span className="text-muted-foreground">(optionnel)</span>
         </Label>
         <Textarea
           id="description"
@@ -135,18 +130,15 @@ export function FormulaireReservation({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          className={`resize-none text-sm ${errors.description ? "border-red-500" : ""}`}
+          className="resize-none text-sm"
         />
-        {errors.description && (
-          <p className="text-xs text-red-500">{errors.description}</p>
-        )}
       </div>
 
       {/* Adresses */}
       <div className="space-y-3">
         <div className="space-y-1.5">
           <Label htmlFor="adresseEnlevement" className="text-sm">
-            Adresse d'enlèvement <span className="text-red-500">*</span>
+            Adresse d&apos;enlèvement <span className="text-muted-foreground">(optionnel)</span>
           </Label>
           <Textarea
             id="adresseEnlevement"
@@ -154,16 +146,13 @@ export function FormulaireReservation({
             value={adresseEnlevement}
             onChange={(e) => setAdresseEnlevement(e.target.value)}
             rows={2}
-            className={`resize-none text-sm ${errors.adresseEnlevement ? "border-red-500" : ""}`}
+            className="resize-none text-sm"
           />
-          {errors.adresseEnlevement && (
-            <p className="text-xs text-red-500">{errors.adresseEnlevement}</p>
-          )}
         </div>
 
         <div className="space-y-1.5">
           <Label htmlFor="adresseLivraison" className="text-sm">
-            Adresse de livraison <span className="text-red-500">*</span>
+            Adresse de livraison <span className="text-muted-foreground">(optionnel)</span>
           </Label>
           <Textarea
             id="adresseLivraison"
@@ -171,11 +160,8 @@ export function FormulaireReservation({
             value={adresseLivraison}
             onChange={(e) => setAdresseLivraison(e.target.value)}
             rows={2}
-            className={`resize-none text-sm ${errors.adresseLivraison ? "border-red-500" : ""}`}
+            className="resize-none text-sm"
           />
-          {errors.adresseLivraison && (
-            <p className="text-xs text-red-500">{errors.adresseLivraison}</p>
-          )}
         </div>
       </div>
 

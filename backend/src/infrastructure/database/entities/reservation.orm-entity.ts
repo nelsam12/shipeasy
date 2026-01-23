@@ -37,14 +37,14 @@ export class ReservationOrmEntity {
   @Column({ name: 'poids_kg', type: 'decimal', precision: 10, scale: 2 })
   poidsKg: number;
 
-  @Column({ type: 'text' })
-  description: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
 
-  @Column({ name: 'adresse_enlevement', type: 'text' })
-  adresseEnlevement: string;
+  @Column({ name: 'adresse_enlevement', type: 'text', nullable: true })
+  adresseEnlevement?: string;
 
-  @Column({ name: 'adresse_livraison', type: 'text' })
-  adresseLivraison: string;
+  @Column({ name: 'adresse_livraison', type: 'text', nullable: true })
+  adresseLivraison?: string;
 
   @Column({ name: 'nom_destinataire' })
   nomDestinataire: string;
