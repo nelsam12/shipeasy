@@ -41,6 +41,13 @@ export const MESSAGES = {
     CHANGE_STATUT_SUCCESS: "Statut modifié avec succès",
     CHANGE_STATUT_ERROR: "Erreur lors de la modification du statut",
   },
+  RESERVATION: {
+    CREATE_SUCCESS: "Réservation créée avec succès",
+    CREATE_ERROR: "Erreur lors de la création de la réservation",
+    CANCEL_SUCCESS: "Réservation annulée avec succès",
+    CANCEL_ERROR: "Erreur lors de l'annulation de la réservation",
+    LOAD_ERROR: "Erreur lors du chargement des réservations",
+  },
   VALIDATION: {
     PHONE_INVALID: "Numéro de téléphone invalide",
     PASSWORD_MISMATCH: "Les mots de passe ne correspondent pas",
@@ -76,6 +83,11 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     GPS: "/users/gps",
+  },
+  RESERVATIONS: {
+    BASE: "/reservations",
+    MES_RESERVATIONS: "/reservations/mes-reservations",
+    ANNULER: (id: number) => `/reservations/${id}/annuler`,
   },
 };
 
