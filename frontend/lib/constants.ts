@@ -83,6 +83,7 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     GPS: "/users/gps",
+    CLIENTS: "/users/clients",
   },
   RESERVATIONS: {
     BASE: "/reservations",

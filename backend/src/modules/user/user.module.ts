@@ -3,6 +3,7 @@ import { DatabaseModule } from '../../infrastructure/database/database.module';
 import { FindUserUseCase } from '../../core/use-cases/user/find-user.use-case';
 import { DeleteUserUseCase } from '../../core/use-cases/user/delete-user.use-case';
 import { ListGPsUseCase } from '../../core/use-cases/user/list-gps.use-case';
+import { ListClientsUseCase } from '../../core/use-cases/user/list-clients.use-case';
 import { ApproveGPUseCase } from '../../core/use-cases/user/approve-gp.use-case';
 import { RejectGPUseCase } from '../../core/use-cases/user/reject-gp.use-case';
 import { UserController } from '../../presentation/controllers/user.controller';
@@ -18,6 +19,7 @@ import { UserController } from '../../presentation/controllers/user.controller';
     FindUserUseCase,
     DeleteUserUseCase,
     ListGPsUseCase,
+    ListClientsUseCase,
     ApproveGPUseCase,
     RejectGPUseCase,
   ],
@@ -25,6 +27,7 @@ import { UserController } from '../../presentation/controllers/user.controller';
     FindUserUseCase,
     DeleteUserUseCase,
     ListGPsUseCase,
+    ListClientsUseCase,
     ApproveGPUseCase,
     RejectGPUseCase,
   ],

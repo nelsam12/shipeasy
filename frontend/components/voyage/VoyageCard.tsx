@@ -2,12 +2,15 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Package } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, MessageSquare, Package } from "lucide-react";
 import type { Voyage, StatutVoyage } from "@/types";
 
 interface VoyageCardProps {
   voyage: Voyage;
   onClick?: () => void;
+  showContactButton?: boolean;
+  onContactGP?: (gpId: number) => void;
 }
 
 const STATUT_COLORS: Record<StatutVoyage, "default" | "secondary" | "destructive" | "outline"> = {
@@ -26,7 +29,7 @@ const STATUT_LABELS: Record<StatutVoyage, string> = {
   TERMINE: "Terminé",
 };
 
-export function VoyageCard({ voyage, onClick }: VoyageCardProps) {
+export function VoyageCard({ voyage, onClick, showContactButton, onContactGP }: VoyageCardProps) {
   const departureDate = new Date(voyage.departureDate);
   const formattedDate = departureDate.toLocaleDateString("fr-FR", {
     day: "numeric",
@@ -50,9 +53,23 @@ export function VoyageCard({ voyage, onClick }: VoyageCardProps) {
             <span>{voyage.arrivalLocation.flag}</span>
             <span>{voyage.arrivalLocation.city}</span>
           </CardTitle>
-          <Badge variant={STATUT_COLORS[voyage.statut]}>
-            {STATUT_LABELS[voyage.statut]}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant={STATUT_COLORS[voyage.statut]}>
+              {STATUT_LABELS[voyage.statut]}
+            </Badge>
+            {showContactButton && voyage.gpCourantId && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onContactGP?.(voyage.gpCourantId as number);
+                }}
+              >
+                <MessageSquare className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-3">
